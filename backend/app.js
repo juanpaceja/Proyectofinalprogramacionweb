@@ -17,13 +17,7 @@ app.get('/', (req, res) => {
 
 const estudiantesRoutes = require('./routes/estudiantesroutes.js');
 
-
-const testRoutes = require('./routes/estudiantesroutes.js');
- //Ruta de prueba
-
-
 app.use(express.json());
 
 app.use('/api', estudiantesRoutes);
 
-app.use('/api', testRoutes);
