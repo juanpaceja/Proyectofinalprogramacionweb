@@ -2,14 +2,8 @@ body {
     height: 100%;
     margin: 0%;
 }
-#nav-bar {
-    background-color: rgb(19, 148, 19);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    font-weight: bold;
-    font-size: xx-large;
+#title {
+    justify-self: left;
 }
 .card {
     margin-left: 0%;
