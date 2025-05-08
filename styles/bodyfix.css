@@ -1,0 +1,18 @@
+html {
+    height: 100vh;
+}
+body {
+    height: 100vh;
+    margin: 0%;
+}
+footer {
+    box-sizing: content-box;
+    background-color: gray;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
