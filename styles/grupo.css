@@ -6,13 +6,5 @@ main {
     margin: 50px 300px 300px 300px;
 }
 footer {
-    box-sizing: content-box;
-    background-color: gray;
-    height: 30px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
 }
