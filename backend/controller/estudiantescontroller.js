@@ -14,11 +14,18 @@ const getStudents = (req, res) => {
 // CREATE
 const createStudent = (req, res) => {
   const nuevo = req.body;
+  console.log('Datos recibidos para crear estudiante:', nuevo);
+
   Estudiante.create(nuevo, (err, result) => {
-    if (err) return res.status(500).json({ error: 'Error al crear estudiante' });
+    if (err) {
+      console.error('❌ ERROR AL CREAR ESTUDIANTE (desde modelo):', err); // 👈 DEBE IMPRIMIR ESTO
+      return res.status(500).json({ error: 'Error al crear estudiante' });
+    }
     res.status(201).json({ message: 'Estudiante creado exitosamente', id: result.insertId });
   });
 };
+
+
 
 // UPDATE
 const updateStudent = (req, res) => {

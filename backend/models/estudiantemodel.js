@@ -15,11 +15,26 @@ const Estudiante = {
   // CREATE
   create: (nuevoEstudiante, callback) => {
     const query = 'INSERT INTO Alumno (nombre, matricula, id_carrera) VALUES (?, ?, ?)';
-    db.query(query, [nuevoEstudiante.nombre, nuevoEstudiante.matricula, nuevoEstudiante.id_carrera], (err, results) => {
-      if (err) return callback(err);
+    console.log('Query SQL:', query);
+    console.log('Valores:', [
+      nuevoEstudiante.nombre,
+      nuevoEstudiante.matricula,
+      nuevoEstudiante.id_carrera
+    ]);
+  
+    db.query(query, [
+      nuevoEstudiante.nombre,
+      nuevoEstudiante.matricula,
+      nuevoEstudiante.id_carrera
+    ], (err, results) => {
+      if (err) {
+        console.error('❌ ERROR SQL:', err); // 👈 ESTE error DEBE aparecer
+        return callback(err);
+      }
       callback(null, results);
     });
   },
+  
 
   // UPDATE
   update: (id, datosActualizados, callback) => {
