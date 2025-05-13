@@ -23,49 +23,64 @@
     </div>
   </nav>
     <main>
-        <div class="card mx-auto">
-            <h5 class="card-header">Registro</h5>
-            <div class="card-body">
-                <form>
-                  <div class="mb-3">
-                    <label for="Name" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="Input-de-nombre">
-                  </div>
-                    <div class="mb-3">
-                      <label for="Email" class="form-label">Correo</label>
-                      <input type="email" class="form-control" id="Input-de-correo">
-                    </div>
-                    <div class="mb-3">
-                      <label for="Semestre" class="form-label">Semestre</label>
-                      <input type="number" class="form-control" id="Input-de-semestre">
-                    </div>
-                    <div class="mb-3">
-                      <label for="Carrera" class="form-label">Carrera</label>
-                      <input type="text" class="form-control" id="Input-de-carrera">
-                    </div>
-                    <div class="mb-3">
-                      <label for="Grupo" class="form-label">Grupo</label>
-                      <input type="text" class="form-control" id="Input-de-grupo">
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                      <input type="password" class="form-control" id="Input-de-contraseña" autocomplete="off">
-                    </div>
-                    <div class="checkbox-wrapper-46">
-                      <input type="checkbox" id="cbx-46" class="inp-cbx" />
-                      <label for="cbx-46" class="cbx"
-                        ><span>
-                          <svg viewBox="0 0 12 10" height="10px" width="12px">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span
-                        ><span>Mostrar contraseña</span>
-                      </label>
-                    </div>
-                    <button type="submit-registro" class="btn btn-primary" id="btn-registro">Enviar</button>
-                  </form>
-            </div>
-          </div>
+      <div class="card mx-auto">
+  <h5 class="card-header">Registro</h5>
+  <div class="card-body">
+    <form>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="Name" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="Input-de-nombre">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="Email" class="form-label">Correo</label>
+          <input type="email" class="form-control" id="Input-de-correo">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="Semestre" class="form-label">Semestre</label>
+          <input type="number" class="form-control" id="Input-de-semestre">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="Carrera" class="form-label">Carrera</label>
+          <input type="text" class="form-control" id="Input-de-carrera">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="Grupo" class="form-label">Grupo</label>
+          <input type="text" class="form-control" id="Input-de-grupo">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="Input-de-contraseña" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="checkbox-wrapper-46">
+          <input type="checkbox" id="cbx-46" class="inp-cbx" />
+          <label for="cbx-46" class="cbx">
+            <span>
+              <svg viewBox="0 0 12 10" height="10px" width="12px">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </svg>
+            </span>
+            <span>Mostrar contraseña</span>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="btn-registro">Enviar</button>
+    </form>
+  </div>
+</div>
+
     </main>
-    <footer class="text-center p-3 position-fixed bottom-0 w-100">
+    <footer class="text-center bg-secundary p-3 position-fixed bottom-0 w-100">
       © 2025 Universidad de Colima
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
