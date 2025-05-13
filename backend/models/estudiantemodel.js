@@ -28,7 +28,7 @@ const Estudiante = {
       nuevoEstudiante.id_carrera
     ], (err, results) => {
       if (err) {
-        console.error('❌ ERROR SQL:', err); // 👈 ESTE error DEBE aparecer
+        console.error(' ERROR SQL:', err); 
         return callback(err);
       }
       callback(null, results);
