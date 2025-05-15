@@ -18,7 +18,7 @@ const createStudent = (req, res) => {
 
   Estudiante.create(nuevo, (err, result) => {
     if (err) {
-      console.error('ERROR AL CREAR ESTUDIANTE (desde modelo):', err); // 👈 DEBE IMPRIMIR ESTO
+      console.error('ERROR AL CREAR ESTUDIANTE (desde modelo):', err);
       return res.status(500).json({ error: 'Error al crear estudiante' });
     }
     res.status(201).json({ message: 'Estudiante creado exitosamente', id: result.insertId });
