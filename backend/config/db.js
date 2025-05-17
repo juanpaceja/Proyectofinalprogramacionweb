@@ -13,5 +13,3 @@ conexion.connect((err) => {
  console.log('Conectado a MySQL.');
 });
 module.exports = conexion
-
-//ola123
