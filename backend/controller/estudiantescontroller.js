@@ -53,3 +53,37 @@ module.exports = {
   deleteStudent
 };
 
+const db = require('../config/db'); // Asegúrate de tener esto
+
+const loginAlumno = (req, res) => {
+  const { id, nombre } = req.body;
+
+  const idAlumno = Number(id); // asegura tipo número
+
+  const query = 'SELECT * FROM Alumno WHERE id_alumno = ? AND nombre = ?';
+
+  db.query(query, [idAlumno, nombre], (err, results) => {
+    if (err) {
+      console.error('Error en la base de datos:', err);
+      return res.status(500).json({ error: 'Error en la base de datos' });
+    }
+
+    console.log('Resultados:', results);
+
+    if (results.length === 0) {
+      return res.status(401).json({ error: 'Credenciales incorrectas' });
+    }
+
+    res.status(200).json({ alumno: results[0] });
+  });
+};
+
+
+module.exports = {
+  getStudents,
+  createStudent,
+  updateStudent,
+  deleteStudent,
+  loginAlumno, // 👈 Agrega aquí también
+};
+
