@@ -46,13 +46,6 @@ const deleteStudent = (req, res) => {
   });
 };
 
-module.exports = {
-  getStudents,
-  createStudent,
-  updateStudent,
-  deleteStudent
-};
-
 const db = require('../config/db'); // Asegúrate de tener esto
 
 const loginAlumno = (req, res) => {
@@ -78,12 +71,32 @@ const loginAlumno = (req, res) => {
   });
 };
 
+const getAlumnoById = (req, res) => {
+  const idAlumno = Number(req.params.id);
+
+  const query = 'SELECT * FROM Alumno WHERE id_alumno = ?';
+
+  db.query(query, [idAlumno], (err, results) => {
+    if (err) {
+      console.error('Error en la base de datos:', err);
+      return res.status(500).json({ error: 'Error en la base de datos' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Alumno no encontrado' });
+    }
+
+    res.status(200).json(results[0]);
+  });
+};
+
 
 module.exports = {
   getStudents,
   createStudent,
   updateStudent,
   deleteStudent,
-  loginAlumno, // 👈 Agrega aquí también
+  loginAlumno,
+  getAlumnoById// 👈 Agrega aquí también
 };
 
