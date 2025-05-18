@@ -74,7 +74,13 @@ const loginAlumno = (req, res) => {
 const getAlumnoById = (req, res) => {
   const idAlumno = Number(req.params.id);
 
-  const query = 'SELECT * FROM Alumno WHERE id_alumno = ?';
+  const query = `
+SELECT Alumno.*, carrera.nombre AS carrera
+FROM Alumno
+JOIN carrera ON Alumno.id_carrera = carrera.id_carrera
+WHERE Alumno.id_alumno = ?;
+
+`;
 
   db.query(query, [idAlumno], (err, results) => {
     if (err) {
@@ -89,6 +95,7 @@ const getAlumnoById = (req, res) => {
     res.status(200).json(results[0]);
   });
 };
+
 
 
 module.exports = {

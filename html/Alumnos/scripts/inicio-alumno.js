@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('nombre-alumno').textContent = data.nombre || 'Sin nombre';
     document.getElementById('Nocuenta-alumno').textContent = `Número de cuenta: ${data.matricula || 'No disponible'}`;
-
+    document.getElementById('carrera-alumno').textContent = `Carrera: ${data.carrera || 'No disponible'}`;
     // Si tienes imagen dinámica, cambia src del img-alumno
     // document.getElementById('img-alumno').src = data.url_imagen || '/imagenes/Ejemplo-img-alumno.jpg';
 
