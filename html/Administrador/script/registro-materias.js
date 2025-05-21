@@ -1,44 +1,86 @@
+    document.addEventListener('DOMContentLoaded', () => {
+      cargarMaterias();
+      cargarPeriodos();
+      cargarProfesores();
 
-document.addEventListener('DOMContentLoaded', () => {
-  const selectCarrera = document.getElementById('Select-carrera');
+      const formulario = document.getElementById('grupoForm');
+      formulario.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-  // 1. Llenar el select con las carreras
-  fetch('http://localhost:3000/api/carrera')
-    .then(res => res.json())
-    .then(data => {
-      data.forEach(carrera => {
-        const option = document.createElement('option');
-        option.value = carrera.id_carrera;
-        option.textContent = carrera.nombre;
-        selectCarrera.appendChild(option);
+        const datos = {
+          nombre: document.getElementById('nombre').value,
+          horario: document.getElementById('horario').value,
+          id_materia: document.getElementById('materia').value,
+          id_periodo: document.getElementById('periodo').value,
+          id_profesor: document.getElementById('profesor').value
+        };
+
+        try {
+          const res = await fetch('/grupos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datos)
+          });
+
+          if (!res.ok) throw new Error('Error al registrar grupo');
+
+          const resultado = await res.json();
+          alert('Grupo registrado con éxito');
+          formulario.reset();
+        } catch (err) {
+          console.error(err);
+          alert('Hubo un problema al registrar el grupo');
+        }
       });
-    })
-    .catch(err => console.error('Error al obtener carreras:', err));
-
-  // 2. Evento para enviar el formulario
-  document.getElementById('form-materia').addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const nuevaMateria = {
-      nombre: document.getElementById('Input-nombre-materia').value,
-      codigo: document.getElementById('Input-codigo').value,
-      creditos: parseInt(document.getElementById('Input-creditos').value),
-      id_carrera: parseInt(document.getElementById('Select-carrera').value)
-    };
-
-    fetch('http://localhost:3000/api/materia', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(nuevaMateria)
-    })
-    .then(res => res.json())
-    .then(data => {
-      alert('Materia registrada con éxito');
-      document.getElementById('form-materia').reset();
-    })
-    .catch(err => {
-      console.error('Error al registrar materia:', err);
-      alert('Error al registrar materia');
     });
-  });
-});
+
+    async function cargarMaterias() {
+      try {
+        const res = await fetch('/materias');
+        const materias = await res.json();
+        const select = document.getElementById('materia');
+        select.innerHTML = '<option value="">Seleccione una materia</option>';
+        materias.forEach(m => {
+          const option = document.createElement('option');
+          option.value = m.id;
+          option.textContent = m.nombre;
+          select.appendChild(option);
+        });
+      } catch (err) {
+        console.error('Error al cargar materias', err);
+      }
+    }
+
+    async function cargarPeriodos() {
+      try {
+        const res = await fetch('/periodos');
+        const periodos = await res.json();
+        const select = document.getElementById('periodo');
+        select.innerHTML = '<option value="">Seleccione un periodo</option>';
+        periodos.forEach(p => {
+          const option = document.createElement('option');
+          option.value = p.id;
+          option.textContent = p.nombre;
+          select.appendChild(option);
+        });
+      } catch (err) {
+        console.error('Error al cargar periodos', err);
+      }
+    }
+
+    async function cargarProfesores() {
+      try {
+        const res = await fetch('/profesores');
+        const profesores = await res.json();
+        const select = document.getElementById('profesor');
+        select.innerHTML = '<option value="">Seleccione un profesor</option>';
+        profesores.forEach(p => {
+          const option = document.createElement('option');
+          option.value = p.id;
+          option.textContent = p.nombre;
+          select.appendChild(option);
+        });
+      } catch (err) {
+        console.error('Error al cargar profesores', err);
+      }
+    };
