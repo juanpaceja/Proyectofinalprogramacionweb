@@ -3,8 +3,8 @@ const Grupo = require('../models/grupomodel.js');
 const getGroup = (req, res) => {
   Grupo.getAll((err, group) => {
     if (err) {
-      console.error('Error al obtener estudiantes:', err);
-      return res.status(500).json({ error: 'Error al obtener estudiantes' });
+      console.error('Error al obtener grupos:', err);
+      return res.status(500).json({ error: 'Error al obtener grupos' });
     }
     res.status(200).json(group);
     console.log('Grupos obtenidos:', group);
@@ -14,17 +14,14 @@ const getGroup = (req, res) => {
 // CREATE
 const createGroup = (req, res) => {
   const nuevo = req.body;
-  console.log('Datos recibidos para crear grupo:', nuevo);
   Grupo.create(nuevo, (err, result) => {
     if (err) {
-      console.error('❌ ERROR AL CREAR GRUPO (desde modelo):', err); // 👈 DEBE IMPRIMIR ESTO
-      return res.status(500).json({ error: 'Error al grupo' });
+      console.error('❌ ERROR AL CREAR GRUPO:', err);
+      return res.status(500).json({ error: 'Error al crear grupo' });
     }
     res.status(201).json({ message: 'Grupo creado exitosamente', id: result.insertId });
   });
 };
-
-
 
 // UPDATE
 const updateGroup = (req, res) => {
@@ -51,4 +48,3 @@ module.exports = {
   updateGroup,
   deleteGroup
 };
-
