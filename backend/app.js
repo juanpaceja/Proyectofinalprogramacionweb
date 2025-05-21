@@ -15,10 +15,8 @@ const carreraRoutes= require('./routes/carreraroutes');
 const maestroRoutes= require('./routes/maestrosroutes');
 const periodoRoutes= require('./routes/periodoroutes');
 const calificacionRoutes = require('./routes/calificacionroutes');
-
-const estudiantesRoutes1 = require('./routes/estudiantesroutes');
-
 const adminRoutes = require('./routes/adminroutes');
+
 
 // Y luego las usa
 app.use('/api', estudiantesRoutes);

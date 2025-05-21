@@ -61,7 +61,29 @@ JOIN materia ON grupo.id_materia = materia.id_materia
 WHERE alumno_grupo.id_alumno = ?  
     `;
     db.query(query, [idAlumno], callback);
-  }
+  },
+
+getHistorialByAlumno: (idAlumno, callback) => {
+  const query = `
+SELECT 
+  m.nombre AS materia,
+  g.nombre AS grupo,
+  p.nombre AS semestre,
+  c.calificacion
+FROM alumno a
+JOIN alumno_grupo ag ON a.id_alumno = ag.id_alumno
+JOIN grupo g ON ag.id_grupo = g.id_grupo
+JOIN materia m ON g.id_materia = m.id_materia
+JOIN periodo_academico p ON g.id_periodo = p.id_periodo
+JOIN calificacion c ON c.id_alumno_grupo = ag.id_alumno_grupo
+WHERE a.id_alumno = ?
+ORDER BY p.id_periodo DESC;
+
+
+  `;
+  db.query(query, [idAlumno], callback);
+}
+
 
 };
 

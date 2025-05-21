@@ -10,5 +10,7 @@ router.put('/calificacion/:id', calificacionController.updateCalificacion);
 router.delete('/calificacion/:id', calificacionController.deleteCalificacion);
 
 router.get('/calificaciones/:id_alumno', calificacionController.getCalificacionesByAlumno);
+router.get('/calificaciones/historial/:id_alumno', calificacionController.getHistorialCalificaciones);
+
 
 module.exports = router;

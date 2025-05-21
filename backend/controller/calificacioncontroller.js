@@ -61,6 +61,17 @@ const getCalificacionesByAlumno = (req, res) => {
   });
 };
 
+const getHistorialCalificaciones = (req, res) => {
+  const id = req.params.id_alumno;
+
+  Calificacion.getHistorialByAlumno(id, (err, results) => {
+    if (err) {
+      console.error('Error al obtener historial de calificaciones:', err);
+      return res.status(500).json({ error: 'Error del servidor' });
+    }
+    res.json(results);
+  });
+};
 
 
 
@@ -75,5 +86,6 @@ module.exports = {
   updateCalificacion,
   deleteCalificacion,
   getCalificacionesByAlumno,
+  getHistorialCalificaciones
 };
 
