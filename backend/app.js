@@ -18,6 +18,8 @@ const calificacionRoutes = require('./routes/calificacionroutes');
 
 const estudiantesRoutes1 = require('./routes/estudiantesroutes');
 
+const adminRoutes = require('./routes/adminroutes');
+
 // Y luego las usa
 app.use('/api', estudiantesRoutes);
 app.use('/api', grupoRoutes);
@@ -28,9 +30,11 @@ app.use('/api', periodoRoutes);
 app.use('/api', estudiantesRoutes);
 app.use('/api', calificacionRoutes);
 
+app.use('/api', adminRoutes);
 
 
 // Arranca el servidor
 app.listen(PORT, () => {
   console.log(`Servidor en funcionamiento en http://localhost:${PORT}`);
 });
+
