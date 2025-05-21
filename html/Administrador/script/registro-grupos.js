@@ -1,7 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-  cargarMaterias();
+  cargarCarreras();
   cargarPeriodos();
   cargarProfesores();
+
+  const carreraSelect = document.getElementById('carrera');
+  carreraSelect.addEventListener('change', (e) => {
+    const idCarrera = e.target.value;
+    if (idCarrera) {
+      cargarMateriasPorCarrera(idCarrera);
+    } else {
+      const materiaSelect = document.getElementById('materia');
+      materiaSelect.innerHTML = '<option value="">Seleccione una materia</option>';
+    }
+  });
 
   const formulario = document.getElementById('grupoForm');
   if (!formulario) {
@@ -12,26 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
   formulario.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Obtener días seleccionados
-   const checkboxes = document.querySelectorAll('input[name="dias"]:checked');
-const diasSeleccionados = Array.from(checkboxes).map(cb => cb.value);
-
-
-    // Obtener horas inicio y fin
+    const checkboxes = document.querySelectorAll('input[name="dias"]:checked');
+    const diasSeleccionados = Array.from(checkboxes).map(cb => cb.value);
     const horaInicio = document.getElementById('horaInicio').value;
     const horaFin = document.getElementById('horaFin').value;
-    if (horaInicio >= horaFin) {
-  alert('La hora de inicio debe ser menor que la hora de fin');
-  return;
-}
 
-    // Validar campos de horario
+    if (horaInicio >= horaFin) {
+      alert('La hora de inicio debe ser menor que la hora de fin');
+      return;
+    }
+
     if (diasSeleccionados.length === 0 || !horaInicio || !horaFin) {
       alert('Por favor, seleccione los días y especifique las horas de inicio y fin.');
       return;
     }
 
-    // Armar string horario
     const horario = diasSeleccionados.join(', ') + ' ' + horaInicio + ' - ' + horaFin;
 
     const datos = {
@@ -42,7 +48,6 @@ const diasSeleccionados = Array.from(checkboxes).map(cb => cb.value);
       id_profesor: document.getElementById('profesor').value,
     };
 
-    // Validar que no haya campos vacíos
     if (!datos.nombre || !datos.id_materia || !datos.id_periodo || !datos.id_profesor) {
       alert('Por favor, complete todos los campos.');
       return;
@@ -67,9 +72,34 @@ const diasSeleccionados = Array.from(checkboxes).map(cb => cb.value);
   });
 });
 
+// Cargar carreras
+async function cargarCarreras() {
+  const loading = document.getElementById('loadingCarreras');
+  loading.style.display = 'inline';
 
-// Función para cargar materias
-async function cargarMaterias() {
+  try {
+    const res = await fetch('http://localhost:3000/api/carrera');
+    if (!res.ok) throw new Error('Error en respuesta carreras');
+    const carreras = await res.json();
+
+    const select = document.getElementById('carrera');
+    select.innerHTML = '<option value="">Seleccione una carrera</option>';
+    carreras.forEach(c => {
+      const option = document.createElement('option');
+      option.value = c.id_carrera;
+      option.textContent = c.nombre;
+      select.appendChild(option);
+    });
+
+    loading.style.display = 'none';
+  } catch (err) {
+    console.error('Error al cargar carreras', err);
+    loading.textContent = 'Error al cargar carreras';
+  }
+}
+
+// Cargar materias por carrera
+async function cargarMateriasPorCarrera(idCarrera) {
   const loading = document.getElementById('loadingMaterias');
   loading.style.display = 'inline';
 
@@ -81,12 +111,14 @@ async function cargarMaterias() {
     const select = document.getElementById('materia');
     select.innerHTML = '<option value="">Seleccione una materia</option>';
 
-    materias.forEach(m => {
-      const option = document.createElement('option');
-      option.value = m.id_materia;
-      option.textContent = m.nombre;
-      select.appendChild(option);
-    });
+    materias
+      .filter(m => m.id_carrera == idCarrera)
+      .forEach(m => {
+        const option = document.createElement('option');
+        option.value = m.id_materia;
+        option.textContent = `${m.nombre} (${m.codigo})`;
+        select.appendChild(option);
+      });
 
     loading.style.display = 'none';
   } catch (err) {
@@ -95,7 +127,7 @@ async function cargarMaterias() {
   }
 }
 
-// Función para cargar periodos
+// Cargar periodos
 async function cargarPeriodos() {
   const loading = document.getElementById('loadingPeriodos');
   loading.style.display = 'inline';
@@ -122,7 +154,7 @@ async function cargarPeriodos() {
   }
 }
 
-// Función para cargar profesores
+// Cargar profesores
 async function cargarProfesores() {
   const loading = document.getElementById('loadingProfesores');
   loading.style.display = 'inline';
@@ -147,4 +179,4 @@ async function cargarProfesores() {
     console.error('Error al cargar profesores', err);
     loading.textContent = 'Error al cargar profesores';
   }
-}
+};

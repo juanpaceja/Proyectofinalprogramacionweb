@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,12 +17,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div id="mimenu" class="navbar-nav ms-auto">
-          <a class="nav-link active ms-auto" href="inicio-admin.html">Inicio</a>
-          <a class="nav-link active ms-auto" href="registro-alumnos.html">Registro alumnos</a>
-          <a class="nav-link active ms-auto" href="registro-maestros.html">Registro maestros</a>
-          <a class="nav-link active ms-auto" href="registro-semestre.html">Registro Semestre</a>
-          <a class="nav-link active ms-auto" href="registro-carreras.html">Registro carreras</a>
-          <a class="nav-link active ms-auto" href="registro-materias.html">Registro materias</a>
+          <a class="nav-link active" href="inicio-admin.html">Inicio</a>
+          <a class="nav-link active" href="registro-alumnos.html">Registro alumnos</a>
+          <a class="nav-link active" href="registro-maestros.html">Registro maestros</a>
+          <a class="nav-link active" href="registro-semestre.html">Registro Semestre</a>
+          <a class="nav-link active" href="registro-carreras.html">Registro carreras</a>
+          <a class="nav-link active" href="registro-materias.html">Registro materias</a>
         </div>
       </div>
     </div>
@@ -32,47 +32,51 @@
     <div class="card mx-auto" style="max-width: 500px;">
       <h5 class="card-header">Registro | grupo</h5>
       <div class="card-body">
-<form id="grupoForm">
+        <form id="grupoForm">
 
-  <label for="nombre">Nombre del Grupo:</label><br />
-  <input type="text" id="nombre" name="nombre" required /><br /><br />
+          <label for="nombre">Nombre del Grupo:</label><br />
+          <input type="text" id="nombre" name="nombre" required /><br /><br />
 
-<label>Días:</label><br />
-<label><input type="checkbox" name="dias" value="Lunes"> Lunes</label><br />
-<label><input type="checkbox" name="dias" value="Martes"> Martes</label><br />
-<label><input type="checkbox" name="dias" value="Miércoles"> Miércoles</label><br />
-<label><input type="checkbox" name="dias" value="Jueves"> Jueves</label><br />
-<label><input type="checkbox" name="dias" value="Viernes"> Viernes</label><br />
+          <label>Días:</label><br />
+          <label><input type="checkbox" name="dias" value="Lunes"> Lunes</label><br />
+          <label><input type="checkbox" name="dias" value="Martes"> Martes</label><br />
+          <label><input type="checkbox" name="dias" value="Miércoles"> Miércoles</label><br />
+          <label><input type="checkbox" name="dias" value="Jueves"> Jueves</label><br />
+          <label><input type="checkbox" name="dias" value="Viernes"> Viernes</label><br /><br />
 
+          <label for="horaInicio">Hora inicio:</label><br />
+          <input type="time" id="horaInicio" name="horaInicio" required /><br /><br />
 
+          <label for="horaFin">Hora fin:</label><br />
+          <input type="time" id="horaFin" name="horaFin" required /><br /><br />
 
-<label for="horaInicio">Hora inicio:</label><br />
-<input type="time" id="horaInicio" name="horaInicio" required /><br /><br />
+          <!-- Si vas a usar carrera, hay que agregar lógica JS para cargarla -->
+          <label for="carrera">Carrera:</label><br />
+          <select id="carrera" name="carrera">
+            <option value="">Seleccione una carrera</option>
+          </select>
+          <span id="loadingCarreras" style="display: none;">Cargando...</span><br /><br />
 
-<label for="horaFin">Hora fin:</label><br />
-<input type="time" id="horaFin" name="horaFin" required /><br /><br />
+          <label for="materia">Materia:</label><br />
+          <select id="materia" name="materia" required>
+            <option value="">Seleccione una materia</option>
+          </select>
+          <span id="loadingMaterias" style="display: none;">Cargando materias...</span><br /><br />
 
+          <label for="periodo">Periodo:</label><br />
+          <select id="periodo" name="periodo" required>
+            <option value="">Seleccione un periodo</option>
+          </select>
+          <span id="loadingPeriodos" style="display: none;">Cargando periodos...</span><br /><br />
 
-  <label for="materia">Materia:</label><br />
-  <select id="materia" name="materia" required>
-    <option value="">Cargando materias...</option>
-  </select>
-  <span id="loadingMaterias" style="margin-left: 10px; display:inline;">Cargando materias...</span><br /><br />
+          <label for="profesor">Profesor:</label><br />
+          <select id="profesor" name="profesor" required>
+            <option value="">Seleccione un profesor</option>
+          </select>
+          <span id="loadingProfesores" style="display: none;">Cargando profesores...</span><br /><br />
 
-  <label for="periodo">Periodo:</label><br />
-  <select id="periodo" name="periodo" required>
-    <option value="">Cargando periodos...</option>
-  </select>
-  <span id="loadingPeriodos" style="margin-left: 10px; display:none;">Cargando periodos...</span><br /><br />
-
-  <label for="profesor">Profesor:</label><br />
-  <select id="profesor" name="profesor" required>
-    <option value="">Cargando profesores...</option>
-  </select>
-  <span id="loadingProfesores" style="margin-left: 10px; display:none;">Cargando profesores...</span><br /><br />
-
-  <button type="submit" class="btn btn-success">Registrar Grupo</button>
-</form>
+          <button type="submit" class="btn btn-success">Registrar Grupo</button>
+        </form>
       </div>
     </div>
   </main>
