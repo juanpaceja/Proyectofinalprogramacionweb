@@ -46,9 +46,36 @@ const deleteTeachers = (req, res) => {
   });
 };
 
+
+const db = require('../config/db'); // Asegúrate de tener esto
+
+const loginMaestro = (req, res) => {
+  const { id, nombre } = req.body;
+
+  const idMaestro = Number(id); // asegura tipo número
+
+  const query = 'SELECT * FROM Profesor WHERE id_profesor = ? AND nombre = ?';
+
+  db.query(query, [idMaestro, nombre], (err, results) => {
+    if (err) {
+      console.error('Error en la base de datos:', err);
+      return res.status(500).json({ error: 'Error en la base de datos' });
+    }
+
+    console.log('Resultados:', results);
+
+    if (results.length === 0) {
+      return res.status(401).json({ error: 'Credenciales incorrectas' });
+    }
+
+    res.status(200).json({ maestro: results[0] });
+  });
+};
+
 module.exports = {
   getTeachers,
   createTeachers,
   updateTeachers,
-  deleteTeachers
+  deleteTeachers,
+  loginMaestro
 };
