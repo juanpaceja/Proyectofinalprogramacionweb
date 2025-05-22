@@ -54,7 +54,18 @@ const Materia = {
       if (err) return callback(err);
       callback(null, results);
     });
-  }
+  },
+
+  getByCarrera: (id_carrera, callback) => {
+  const query = 'SELECT * FROM materia WHERE id_carrera = ?';
+  db.query(query, [id_carrera], (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+}
+
 };
+
+
 
 module.exports = Materia;

@@ -1,4 +1,5 @@
 const Materia = require('../models/materiamodel.js');
+const db = require('../config/db');
 
 const getMateria = (req, res) => {
   Materia.getAll((err, materia) => {
@@ -46,9 +47,46 @@ const deleteMateria = (req, res) => {
   });
 };
 
+const getByCarrera = (req, res) => {
+  const carreraId = req.params.id;
+  const query = 'SELECT * FROM materia WHERE id_carrera = ?';
+
+  Materia.getByCarrera(carreraId, (err, results) => {
+    if (err) return res.status(500).json({ error: 'Error al obtener materias' });
+    res.status(200).json(results);
+  });
+};
+
+const getByMaestro = (req, res) => {
+  const idMaestro = req.params.id;
+
+  const sql = `
+    SELECT DISTINCT 
+      m.id_materia,
+      m.nombre AS nombre,
+      m.codigo,
+      m.creditos
+    FROM grupo g
+    JOIN materia m ON g.id_materia = m.id_materia
+    WHERE g.id_profesor = ?;
+  `;
+
+  db.query(sql, [idMaestro], (err, results) => {
+    if (err) {
+      console.error('Error al obtener materias por profesor:', err);
+      return res.status(500).json({ error: 'Error al obtener materias por profesor' });
+    }
+    res.status(200).json(results);
+  });
+};
+
+
+
 module.exports = {
   getMateria,
   createMateria,
   updateMateria,
-  deleteMateria 
+  deleteMateria,
+  getByCarrera,
+  getByMaestro
 };

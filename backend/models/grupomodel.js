@@ -70,7 +70,64 @@ JOIN profesor ON grupo.id_profesor = profesor.id_profesor;
       callback(null, results);
     });
   },
+  queryCustom: (sql, params, callback) => {
+  db.query(sql, params, (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+},
 
+getAlumnosByGrupo: (idGrupo, callback) => {
+  const query = `
+    SELECT 
+      a.id_alumno,
+      a.nombre AS alumno,
+      a.matricula,
+      c.nombre AS carrera
+    FROM alumno_grupo ag
+    JOIN alumno a ON ag.id_alumno = a.id_alumno
+    JOIN carrera c ON a.id_carrera = c.id_carrera
+    WHERE ag.id_grupo = ?;
+  `;
+  db.query(query, [idGrupo], (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+},
+
+getAlumnosConCalificaciones: (idGrupo, callback) => {
+    const query = `
+      SELECT 
+        a.id_alumno,
+        a.nombre AS alumno,
+        a.matricula,
+        c.nombre AS carrera,
+        cal.calificacion,
+        ag.id_alumno_grupo
+      FROM alumno_grupo ag
+      JOIN alumno a ON ag.id_alumno = a.id_alumno
+      JOIN carrera c ON a.id_carrera = c.id_carrera
+      LEFT JOIN calificacion cal ON cal.id_alumno_grupo = ag.id_alumno_grupo
+      WHERE ag.id_grupo = ?;
+    `;
+    db.query(query, [idGrupo], (err, results) => {
+      if (err) return callback(err);
+      callback(null, results);
+    });
+  },
+
+  // Método para actualizar o insertar calificación
+  upsertCalificacion: (idAlumnoGrupo, calificacion, callback) => {
+    const query = `
+      INSERT INTO calificacion (id_alumno_grupo, calificacion)
+      VALUES (?, ?)
+      ON DUPLICATE KEY UPDATE calificacion = VALUES(calificacion);
+    `;
+    db.query(query, [idAlumnoGrupo, calificacion], (err, results) => {
+      if (err) return callback(err);
+      callback(null, results);
+    });
+  }
 getByCarrera: (idCarrera, callback) => {
   const query = `
     SELECT 
@@ -91,9 +148,6 @@ getByCarrera: (idCarrera, callback) => {
     callback(null, results);
   });
 }
-
-
-
 };
 
 module.exports = Grupo;
