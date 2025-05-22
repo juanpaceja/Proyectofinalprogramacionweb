@@ -42,9 +42,27 @@ const deleteGroup = (req, res) => {
   });
 };
 
+const getGruposPorCarrera = (req, res) => {
+  const idCarrera = req.query.idCarrera;
+  if (idCarrera) {
+    Grupo.getByCarrera(idCarrera, (err, grupos) => {
+      if (err) return res.status(500).json({ error: 'Error en la base de datos' });
+      res.json(grupos);
+    });
+  } else {
+    Grupo.getAll((err, grupos) => {
+      if (err) return res.status(500).json({ error: 'Error en la base de datos' });
+      res.json(grupos);
+    });
+  }
+};
+
+
+
 module.exports = {
   getGroup,
   createGroup,
   updateGroup,
-  deleteGroup
+  deleteGroup,
+  getGruposPorCarrera
 };

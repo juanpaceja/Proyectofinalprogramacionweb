@@ -96,7 +96,33 @@ WHERE Alumno.id_alumno = ?;
   });
 };
 
+const asignarGrupo = (req, res) => {
+  const { id_alumno, id_grupo } = req.body;
 
+  if (!id_alumno || !id_grupo) {
+    return res.status(400).json({ error: 'Faltan datos requeridos' });
+  }
+
+  Estudiante.asignarGrupo(id_alumno, id_grupo, (err, result) => {
+    if (err) {
+      console.error('Error al asignar grupo:', err);
+      return res.status(500).json({ error: 'Error al asignar grupo' });
+    }
+    res.status(201).json({ message: 'Grupo asignado correctamente' });
+  });
+};
+
+const obtenerGruposAlumno = (req, res) => {
+  const idAlumno = req.params.id;
+
+  Estudiante.getGrupos(idAlumno, (err, grupos) => {
+    if (err) {
+      console.error('Error al obtener grupos del alumno:', err);
+      return res.status(500).json({ error: 'Error al obtener grupos' });
+    }
+    res.status(200).json(grupos);
+  });
+};
 
 module.exports = {
   getStudents,
@@ -104,6 +130,8 @@ module.exports = {
   updateStudent,
   deleteStudent,
   loginAlumno,
-  getAlumnoById// 👈 Agrega aquí también
+  getAlumnoById, 
+  asignarGrupo,
+  obtenerGruposAlumno
 };
 

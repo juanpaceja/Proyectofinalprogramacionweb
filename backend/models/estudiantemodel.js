@@ -52,6 +52,29 @@ const Estudiante = {
       if (err) return callback(err);
       callback(null, results);
     });
+  },
+
+  // Asignar grupo a alumno
+  asignarGrupo: (idAlumno, idGrupo, callback) => {
+    const query = 'INSERT INTO alumno_grupo (id_alumno, id_grupo) VALUES (?, ?)';
+    db.query(query, [idAlumno, idGrupo], (err, results) => {
+      if (err) return callback(err);
+      callback(null, results);
+    });
+  },
+
+  // Obtener grupos del alumno
+  getGrupos: (idAlumno, callback) => {
+    const query = `
+      SELECT g.* 
+      FROM alumno_grupo ag
+      JOIN grupo g ON ag.id_grupo = g.id_grupo
+      WHERE ag.id_alumno = ?
+    `;
+    db.query(query, [idAlumno], (err, results) => {
+      if (err) return callback(err);
+      callback(null, results);
+    });
   }
 };
 
