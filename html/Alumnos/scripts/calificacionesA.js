@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    fetch(`http://localhost:3000/api/calificaciones/${idAlumno}`)
+    fetch(`http://localhost:3000/api/calificaciones/actual/${idAlumno}`)
         .then(res => res.json())
         .then(data => {
         const tbody = document.getElementById('table-content');
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
           row.innerHTML = `
             <td><h6 class="mb-1">${item.materia}</h6></td>
             <td><h6 class="mb-1">${item.calificacion}</h6></td>
+            <td><h6 class="mb-1">${item.estado}</h6></td>
           `;
           tbody.appendChild(row);
         });
