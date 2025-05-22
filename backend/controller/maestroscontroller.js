@@ -72,10 +72,19 @@ const loginMaestro = (req, res) => {
   });
 };
 
+const getMaestroById = (req, res) => {
+  const id = req.params.id;
+  Maestro.getMaestroById(id, (err, results) => {
+    if (err) return res.status(500).json({ error: 'Error al obtener maestro' });
+    res.status(200).json(results);
+  });
+};
+
 module.exports = {
   getTeachers,
   createTeachers,
   updateTeachers,
   deleteTeachers,
-  loginMaestro
+  loginMaestro,
+  getMaestroById
 };

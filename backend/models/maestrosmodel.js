@@ -48,7 +48,16 @@ const Maestro = {
       if (err) return callback(err);
       callback(null, results);
     });
-  }
+  },
+
+  getMaestroById: (id, callback) => {
+    const query = 'SELECT * FROM profesor WHERE id_profesor = ?';
+    db.query(query, [id], (err, results) => {
+      if (err) return callback(err);
+      callback(null, results);
+    });
+  },
 };
+
 
 module.exports = Maestro;

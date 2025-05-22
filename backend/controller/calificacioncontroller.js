@@ -73,6 +73,18 @@ const getHistorialCalificaciones = (req, res) => {
   });
 };
 
+const getCalificacionActual = (req, res) => {
+  const id = req.params.id_alumno;
+
+  Calificacion.getCalificacionActual(id, (err, results) => {
+    if (err) {
+      console.error('Error al obtener calificaciones del alumno:', err);
+      return res.status(500).json({ error: 'Error del servidor' });
+    }
+    res.json(results);
+  });
+}
+
 
 
 const db = require('../config/db'); // Asegúrate de tener esto
@@ -86,6 +98,7 @@ module.exports = {
   updateCalificacion,
   deleteCalificacion,
   getCalificacionesByAlumno,
-  getHistorialCalificaciones
+  getHistorialCalificaciones,
+  getCalificacionActual
 };
 

@@ -141,7 +141,7 @@ getByCarrera: (idCarrera, callback) => {
     JOIN materia ON grupo.id_materia = materia.id_materia
     JOIN periodo_academico ON grupo.id_periodo = periodo_academico.id_periodo
     JOIN profesor ON grupo.id_profesor = profesor.id_profesor
-    WHERE materia.id_carrera = ?
+    WHERE materia.id_carrera = ?;
   `;
   db.query(query, [idCarrera], (err, results) => {
     if (err) return callback(err);

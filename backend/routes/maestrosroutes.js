@@ -10,5 +10,6 @@ router.put('/maestros/:id', maestrosController.updateTeachers);
 router.delete('/maestros/:id', maestrosController.deleteTeachers);
 
 router.post('/login/maestro', maestrosController.loginMaestro);
+router.get('/maestros/:id', maestrosController.getMaestroById);
 
 module.exports = router;
