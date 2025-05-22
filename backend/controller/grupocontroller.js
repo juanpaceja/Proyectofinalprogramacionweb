@@ -123,6 +123,7 @@ const updateCalificacion = (req, res) => {
     }
     res.status(200).json({ message: 'Calificación actualizada correctamente' });
   });
+};
 const getGruposPorCarrera = (req, res) => {
   const idCarrera = req.query.idCarrera;
   if (idCarrera) {
@@ -149,6 +150,6 @@ module.exports = {
   getByProfesor,
   getAlumnosByGrupo,
   getAlumnosConCalificaciones,
-  updateCalificacion
+  updateCalificacion,
   getGruposPorCarrera
 };
