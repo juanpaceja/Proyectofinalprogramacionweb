@@ -127,7 +127,7 @@ getAlumnosConCalificaciones: (idGrupo, callback) => {
       if (err) return callback(err);
       callback(null, results);
     });
-  }
+  },
 getByCarrera: (idCarrera, callback) => {
   const query = `
     SELECT 
