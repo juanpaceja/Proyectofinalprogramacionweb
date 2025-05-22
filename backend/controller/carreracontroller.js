@@ -46,9 +46,33 @@ const deleteCarrera = (req, res) => {
   });
 };
 
+const db = require('../config/db');
+
+
+const getCarrerasPorProfesor = (req, res) => {
+  const idProfesor = req.params.id;
+
+  const query = `
+    SELECT DISTINCT c.id_carrera, c.nombre AS carrera
+    FROM profesor p
+    JOIN grupo g ON p.id_profesor = g.id_profesor
+    JOIN materia m ON g.id_materia = m.id_materia
+    JOIN carrera c ON m.id_carrera = c.id_carrera
+    WHERE p.id_profesor = ?
+  `;
+
+  db.query(query, [idProfesor], (err, results) => {
+    if (err) return res.status(500).json({ error: 'Error al obtener carreras' });
+    res.status(200).json(results);
+  });
+};
+
+
+
 module.exports = {
   getCarrera,
   createCarrera,
   updateCarrera,
-  deleteCarrera
+  deleteCarrera,
+  getCarrerasPorProfesor
 };
