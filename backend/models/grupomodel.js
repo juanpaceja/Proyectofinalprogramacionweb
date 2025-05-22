@@ -70,7 +70,6 @@ JOIN profesor ON grupo.id_profesor = profesor.id_profesor;
       callback(null, results);
     });
   },
-
   queryCustom: (sql, params, callback) => {
   db.query(sql, params, (err, results) => {
     if (err) return callback(err);
@@ -129,7 +128,26 @@ getAlumnosConCalificaciones: (idGrupo, callback) => {
       callback(null, results);
     });
   }
-
+getByCarrera: (idCarrera, callback) => {
+  const query = `
+    SELECT 
+      grupo.id_grupo,
+      grupo.nombre AS nombre_grupo,
+      grupo.horario,
+      materia.nombre AS nombre_materia,
+      periodo_academico.nombre AS nombre_periodo,
+      profesor.nombre AS nombre_profesor
+    FROM grupo
+    JOIN materia ON grupo.id_materia = materia.id_materia
+    JOIN periodo_academico ON grupo.id_periodo = periodo_academico.id_periodo
+    JOIN profesor ON grupo.id_profesor = profesor.id_profesor
+    WHERE materia.id_carrera = ?
+  `;
+  db.query(query, [idCarrera], (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+}
 };
 
 module.exports = Grupo;

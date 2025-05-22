@@ -42,8 +42,6 @@ const deleteGroup = (req, res) => {
   });
 };
 
-
-
 const getByMateria = (req, res) => {
   const idMateria = req.params.id;
   const query = `
@@ -125,6 +123,19 @@ const updateCalificacion = (req, res) => {
     }
     res.status(200).json({ message: 'Calificación actualizada correctamente' });
   });
+const getGruposPorCarrera = (req, res) => {
+  const idCarrera = req.query.idCarrera;
+  if (idCarrera) {
+    Grupo.getByCarrera(idCarrera, (err, grupos) => {
+      if (err) return res.status(500).json({ error: 'Error en la base de datos' });
+      res.json(grupos);
+    });
+  } else {
+    Grupo.getAll((err, grupos) => {
+      if (err) return res.status(500).json({ error: 'Error en la base de datos' });
+      res.json(grupos);
+    });
+  }
 };
 
 
@@ -139,4 +150,5 @@ module.exports = {
   getAlumnosByGrupo,
   getAlumnosConCalificaciones,
   updateCalificacion
+  getGruposPorCarrera
 };
