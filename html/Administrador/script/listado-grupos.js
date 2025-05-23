@@ -1,5 +1,5 @@
 async function cargarGrupos() {
-  const contenedor = document.getElementById('contenedor-tablas').parentElement;
+  const contenedor = document.getElementById('contenedor-tablas');
   contenedor.innerHTML = ''; // Limpiar contenido original
 
   try {
