@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo - Universidad de Colima</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/listado.css">
+</head>
+<body class="bg-light">
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark uc-color shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-building me-2"></i>Universidad de Colima | Administrador
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="inicio-admin.html"><i class="bi bi-house-door me-1"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/html/Maestros/materia.html"><i class="bi bi-journal-bookmark me-1"></i> Materias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/html/Maestros/carreras.html"><i class="bi bi-book me-1"></i> Carreras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/html/Maestros/grupos.html"><i class="bi bi-people me-1"></i> Grupos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box clearfix" id="contenedor-tablas">
+                    <table id="tabla-grupos">
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/html/Administrador/script/listado-grupos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
