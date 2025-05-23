@@ -13,16 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const res = await fetch('/materias', { // ruta para crear materia
+      const res = await fetch('http://localhost:3000/api/materia', { // ruta para crear materia
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datos)
       });
 
+      const resBody = await res.json();
+
       if (!res.ok) throw new Error('Error al registrar materia');
+
 
       alert('Materia registrada con éxito');
       formulario.reset();
+      
     } catch (err) {
       console.error(err);
       alert('Hubo un problema al registrar la materia');

@@ -4,7 +4,6 @@ const cors = require('cors');
 const PORT = 3000;
 
 app.use(cors());
-// 👇 Esto va primero
 app.use(express.json());
 
 // Luego importa las rutas
