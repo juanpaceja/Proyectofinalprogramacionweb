@@ -15,6 +15,8 @@ router.get('/profesor/:id', grupoController.getByProfesor);
 router.get('/grupos/:id/alumnos', grupoController.getAlumnosByGrupo);
 router.get('/grupos/:id/alumnos-calificaciones', grupoController.getAlumnosConCalificaciones);
 router.put('/calificacion', grupoController.updateCalificacion);
+router.get('/grupos-usuarios', grupoController.getGruposConAlumnos);
+
 
 
 module.exports = router;

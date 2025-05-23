@@ -42,29 +42,6 @@ const deleteGroup = (req, res) => {
   });
 };
 
-const getByMateria = (req, res) => {
-  const idMateria = req.params.id;
-  const query = `
-    SELECT 
-      grupo.id_grupo,
-      grupo.nombre AS nombre_grupo,
-      grupo.horario,
-      materia.nombre AS nombre_materia,
-      periodo_academico.nombre AS nombre_periodo,
-      profesor.nombre AS nombre_profesor
-    FROM grupo
-    JOIN materia ON grupo.id_materia = materia.id_materia
-    JOIN periodo_academico ON grupo.id_periodo = periodo_academico.id_periodo
-    JOIN profesor ON grupo.id_profesor = profesor.id_profesor
-    WHERE grupo.id_materia = ?
-  `;
-
-  Grupo.queryCustom(query, [idMateria], (err, results) => {
-    if (err) return res.status(500).json({ error: 'Error al obtener grupos' });
-    res.status(200).json(results);
-  });
-};
-
 const getByProfesor = (req, res) => {
   const idProfesor = req.params.id;
 
@@ -140,6 +117,52 @@ const getGruposPorCarrera = (req, res) => {
 };
 
 
+const db = require('../config/db');
+
+const getGruposConAlumnos = async (req, res) => {
+  const sqlGrupos = `SELECT id_grupo, nombre FROM grupo`;
+
+  db.query(sqlGrupos, async (err, grupos) => {
+    if (err) return res.status(500).json({ error: 'Error al obtener grupos' });
+
+    const resultado = [];
+
+    for (const grupo of grupos) {
+      const sqlAlumnos = `
+        SELECT a.nombre AS nombre, 'Alumno' AS rol, NULL AS avatar_url
+        FROM alumno a
+        JOIN alumno_grupo ag ON ag.id_alumno = a.id_alumno
+        WHERE ag.id_grupo = ?
+      `;
+
+      const alumnos = await new Promise((resolve, reject) => {
+        db.query(sqlAlumnos, [grupo.id_grupo], (err, rows) => {
+          if (err) reject(err);
+          else resolve(rows);
+        });
+      });
+
+      resultado.push({
+        grupo: grupo.nombre,
+        usuarios: alumnos
+      });
+    }
+
+    res.json(resultado);
+  });
+};
+  const getByMateria = (req, res) => {
+    const idMateria = req.params.id;
+    Grupo.getByMateria(idMateria, (err, grupos) => {
+        if (err) {
+            console.error('Error al obtener grupos por materia:', err);
+            return res.status(500).json({ error: 'Error al obtener grupos por materia' });
+        }
+        res.status(200).json(grupos);
+    });
+  };
+
+
 
 module.exports = {
   getGroup,
@@ -151,5 +174,6 @@ module.exports = {
   getAlumnosByGrupo,
   getAlumnosConCalificaciones,
   updateCalificacion,
-  getGruposPorCarrera
+  getGruposPorCarrera,
+  getGruposConAlumnos
 };

@@ -99,7 +99,14 @@ JOIN periodo_academico p ON g.id_periodo = p.id_periodo
 JOIN calificacion c ON c.id_alumno_grupo = ag.id_alumno_grupo
 JOIN escala_calificacion e ON c.calificacion BETWEEN e.rango_inicio AND e.rango_fin
 WHERE a.id_alumno = ?
-  AND p.id_periodo IN (4, 5); -- ← aquí se colocan los ID de los periodos "actuales"`;
+  AND p.id_periodo = (
+    SELECT MAX(p2.id_periodo)
+    FROM alumno_grupo ag2
+    JOIN grupo g2 ON ag2.id_grupo = g2.id_grupo
+    JOIN periodo_academico p2 ON g2.id_periodo = p2.id_periodo
+    WHERE ag2.id_alumno = a.id_alumno
+  );
+`;
     db.query(query, [idAlumno], callback);
   }
 };
