@@ -1,55 +1,112 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Página de Inicio</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
   <style>
     body {
-      height: 100vh;
-      background: linear-gradient(to bottom right, #e8f5e9, #c8e6c9);
+      background-color: #f8f9fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-top: 70px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    nav.navbar {
+      background-color: #006341 !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    h2.navbar-brand {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    h2.navbar-brand {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+h2.navbar-brand:hover,
+h2.navbar-brand:focus {
+  color: #fff !important;
+  cursor: default;
+}  
+    main {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container.text-center {
+      max-width: 400px;
+      width: 100%;
+      background: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #006341;
+      margin-bottom: 2rem;
+    }
+    .boton-inicio {
+      width: 100%;
+      height: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 0.375rem;
+      background-color: #006341;
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 2px 6px rgba(0,99,65,0.4);
     }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #2e7d32;
-    }
-
-    .boton-inicio {
-      width: 200px;
-      height: 55px;
-      font-size: 1.1rem;
-      font-weight: 500;
-      border-radius: 12px;
-      background-color: #66bb6a;
-      color: white;
-      border: none;
-      transition: all 0.2s ease-in-out;
-    }
-
     .boton-inicio:hover {
-      background-color: #4caf50;
-      transform: scale(1.05);
+      background-color: #004d27;
+      text-decoration: none;
+    }
+    .d-flex.flex-column.gap-4.align-items-center {
+      gap: 1rem !important;
     }
   </style>
 </head>
 <body>
-  <div class="container text-center">
-    <h1 class="mb-5">Universidad de Colima</h1>
-    <div class="d-flex flex-column gap-4 align-items-center">
-      <a href="./inicio-de-sesion/index.html" class="boton-inicio">Alumno</a>
-      <a href="./inicio-de-sesion/inicio-sesion-maestro.html" class="boton-inicio">Maestro</a>
-      <a href="./inicio-de-sesion/inicio-sesion-admin.html" class="boton-inicio">Administrador</a>
+  <nav class="navbar navbar-expand-lg fixed-top p-0 pt-3 pb-3">
+    <div class="container-fluid">
+      <h2 class="navbar-brand">
+        <i class="bi bi-house-door"></i> Universidad de Colima | Página de Inicio
+      </h2>
     </div>
-  </div>
+  </nav>
+
+  <main>
+    <div class="container text-center">
+      <h1>Universidad de Colima</h1>
+      <div class="d-flex flex-column gap-4 align-items-center">
+        <a href="./inicio-de-sesion/index.html" class="boton-inicio" id="btn-alumno">Alumno</a>
+        <a href="./inicio-de-sesion/inicio-sesion-maestro.html" class="boton-inicio" id="btn-maestro">Maestro</a>
+        <a href="./inicio-de-sesion/inicio-sesion-admin.html" class="boton-inicio" id="btn-administrador">Administrador</a>
+      </div>
+    </div>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

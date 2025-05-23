@@ -1,18 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Universidad de colima</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/grupo.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      nav.navbar.bg-success {
+        background-color: #006341 !important; /* Verde Bootstrap */
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+      h2.navbar-brand {
+        color: white;
+        font-weight: 700;
+      }
+      #mimenu .nav-link.active {
+        color: white !important;
+        font-weight: 600;
+      }
+      .card.widget-card {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        transition: transform 0.2s ease;
+      }
+      .card.widget-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+      .btn-outline-secondary {
+        border-color: #006341;
+        color: #006341;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+      .btn-outline-secondary:hover {
+        background-color: #006341;
+        color: white;
+        border-color: #006341;
+      }
+      .card-title.widget-card-title {
+        color: #006341;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-success p-0 pt-3 pb-3">
         <div class="container-fluid">
             <h2 class="navbar-brand">Universidad de colima | Maestros</h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-            <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div id="mimenu" class="navbar-nav ms-auto">
@@ -23,67 +69,67 @@
     </nav>
     <main>
       <!-- Table 1 - Bootstrap Brain Component -->
-<section class="py-3 py-md-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-9 col-xl-8">
-        <div class="card widget-card border-light shadow-sm">
-          <div class="card-body p-4">
-            <h5 class="card-title widget-card-title mb-4">carrera | materia | Grupo</h5>
-            <div class="table-responsive">
-              <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
-                <thead>
-                  <tr>
-                    <th>Alumno</th>
-                    <th>calificacion</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <h6 class="mb-1">#HO3210</h6>
-                    </td>
-                    <td class="d-flex align-items-center gap-2">
-                      <h6 class="mb-0">Oliver</h6>
-                      <button class="btn btn-outline-secondary btn-sm">Set</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h6 class="mb-1">#DR8672</h6>
-                    </td>
-                    <td class="d-flex align-items-center gap-2">
-                      <h6 class="mb-0">Oliver</h6>
-                      <button class="btn btn-outline-secondary btn-sm">Set</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h6 class="mb-1">#SA2910</h6>
-                    </td>
-                    <td class="d-flex align-items-center gap-2">
-                      <h6 class="mb-0">Oliver</h6>
-                      <button class="btn btn-outline-secondary btn-sm">Set</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h6 class="mb-1">#BD1019</h6>
-                    </td>
-                    <td class="d-flex align-items-center gap-2">
-                      <h6 class="mb-0">Oliver</h6>
-                      <button class="btn btn-outline-secondary btn-sm">Set</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+      <section class="py-3 py-md-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xl-8">
+              <div class="card widget-card border-light shadow-sm">
+                <div class="card-body p-4">
+                  <h5 class="card-title widget-card-title mb-4">carrera | materia | Grupo</h5>
+                  <div class="table-responsive">
+                    <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
+                      <thead>
+                        <tr>
+                          <th>Alumno</th>
+                          <th>calificacion</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <h6 class="mb-1">#HO3210</h6>
+                          </td>
+                          <td class="d-flex align-items-center gap-2">
+                            <h6 class="mb-0">Oliver</h6>
+                            <button class="btn btn-outline-secondary btn-sm">Set</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6 class="mb-1">#DR8672</h6>
+                          </td>
+                          <td class="d-flex align-items-center gap-2">
+                            <h6 class="mb-0">Oliver</h6>
+                            <button class="btn btn-outline-secondary btn-sm">Set</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6 class="mb-1">#SA2910</h6>
+                          </td>
+                          <td class="d-flex align-items-center gap-2">
+                            <h6 class="mb-0">Oliver</h6>
+                            <button class="btn btn-outline-secondary btn-sm">Set</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6 class="mb-1">#BD1019</h6>
+                          </td>
+                          <td class="d-flex align-items-center gap-2">
+                            <h6 class="mb-0">Oliver</h6>
+                            <button class="btn btn-outline-secondary btn-sm">Set</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
     </main>
     <script src="/html/Maestros/scripts/grupo.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
