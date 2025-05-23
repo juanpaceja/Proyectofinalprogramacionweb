@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         card.innerHTML = `
           <div class="card-body p-4">
-            <h5 class="card-title widget-card-title mb-4">Calificaciones ${semestre}</h5>
+            <h5 class="card-title widget-card-title mb-4">${semestre}</h5>
             <div class="table-responsive">
               <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
                 <thead>
