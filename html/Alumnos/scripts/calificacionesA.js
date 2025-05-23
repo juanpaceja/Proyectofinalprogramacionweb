@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then(data => {
           const nombreSemestre = data[0].semestre || '';
-    document.getElementById('semestre-actual').textContent = `| ${nombreSemestre}`;
+    //document.getElementById('semestre-actual').textContent = `| ${nombreSemestre}`;
 
         const tbody = document.getElementById('table-content');
         data.forEach(item => {

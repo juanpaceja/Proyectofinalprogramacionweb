@@ -83,7 +83,7 @@ const getCalificacionActual = (req, res) => {
     }
     res.json(results);
   });
-}
+};
 
 
 
