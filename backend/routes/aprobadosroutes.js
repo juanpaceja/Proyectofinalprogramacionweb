@@ -6,3 +6,5 @@ const aprobadosController = require('../controller/aprobadoscontroller.js');
 
 router.get('/aprobados', aprobadosController.getAprobados);
 router.get('/reprobados', aprobadosController.getReprobados);
+
+module.exports = router;

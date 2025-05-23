@@ -18,6 +18,7 @@ const adminRoutes = require('./routes/adminroutes');
 const aprobadosRoutes = require('./routes/aprobadosroutes');
 
 
+
 // Y luego las usa
 app.use('/api', estudiantesRoutes);
 app.use('/api', grupoRoutes);

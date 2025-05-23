@@ -21,6 +21,7 @@ document.getElementById('login-form-admin').addEventListener('submit', async fun
             localStorage.setItem('id_admin', data.admin.id_admin); // 👈 Clave nueva
             
             window.location.href = '/html/Administrador/inicio-admin.html';
+            console.log(data.admin);
         } else {
             alert(data.error || 'Nombre o ID incorrecto');
         }
