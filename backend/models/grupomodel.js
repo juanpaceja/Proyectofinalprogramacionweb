@@ -147,6 +147,27 @@ getByCarrera: (idCarrera, callback) => {
     if (err) return callback(err);
     callback(null, results);
   });
+},
+
+  getByMateria: (idMateria, callback) => {
+  const query = `
+    SELECT 
+      grupo.id_grupo,
+      grupo.nombre AS nombre_grupo,
+      grupo.horario,
+      materia.nombre AS nombre_materia,
+      periodo_academico.nombre AS nombre_periodo,
+      profesor.nombre AS nombre_profesor
+    FROM grupo
+    JOIN materia ON grupo.id_materia = materia.id_materia
+    JOIN periodo_academico ON grupo.id_periodo = periodo_academico.id_periodo
+    JOIN profesor ON grupo.id_profesor = profesor.id_profesor
+    WHERE grupo.id_materia = ?;
+  `;
+  db.query(query, [idMateria], (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
 }
 };
 

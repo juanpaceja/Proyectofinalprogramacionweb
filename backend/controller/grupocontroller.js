@@ -42,29 +42,6 @@ const deleteGroup = (req, res) => {
   });
 };
 
-const getByMateria = (req, res) => {
-  const idMateria = req.params.id;
-  const query = `
-    SELECT 
-      grupo.id_grupo,
-      grupo.nombre AS nombre_grupo,
-      grupo.horario,
-      materia.nombre AS nombre_materia,
-      periodo_academico.nombre AS nombre_periodo,
-      profesor.nombre AS nombre_profesor
-    FROM grupo
-    JOIN materia ON grupo.id_materia = materia.id_materia
-    JOIN periodo_academico ON grupo.id_periodo = periodo_academico.id_periodo
-    JOIN profesor ON grupo.id_profesor = profesor.id_profesor
-    WHERE grupo.id_materia = ?
-  `;
-
-  Grupo.queryCustom(query, [idMateria], (err, results) => {
-    if (err) return res.status(500).json({ error: 'Error al obtener grupos' });
-    res.status(200).json(results);
-  });
-};
-
 const getByProfesor = (req, res) => {
   const idProfesor = req.params.id;
 
@@ -139,6 +116,7 @@ const getGruposPorCarrera = (req, res) => {
   }
 };
 
+
 const db = require('../config/db');
 
 const getGruposConAlumnos = async (req, res) => {
@@ -173,6 +151,16 @@ const getGruposConAlumnos = async (req, res) => {
     res.json(resultado);
   });
 };
+  const getByMateria = (req, res) => {
+    const idMateria = req.params.id;
+    Grupo.getByMateria(idMateria, (err, grupos) => {
+        if (err) {
+            console.error('Error al obtener grupos por materia:', err);
+            return res.status(500).json({ error: 'Error al obtener grupos por materia' });
+        }
+        res.status(200).json(grupos);
+    });
+  };
 
 
 
