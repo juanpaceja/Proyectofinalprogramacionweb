@@ -25,7 +25,6 @@ app.use('/api', carreraRoutes);
 app.use('/api', maestroRoutes);
 app.use('/api', periodoRoutes);
 app.use('/api', calificacionRoutes);
-
 app.use('/api', adminRoutes);
 
 
