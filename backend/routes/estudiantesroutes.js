@@ -16,5 +16,6 @@ router.post('/estudiantes/grupo', estudiantesController.asignarGrupo);
 router.get('/estudiantes/:id/grupos', estudiantesController.obtenerGruposAlumno);
 
 
+
 module.exports = router;
 
