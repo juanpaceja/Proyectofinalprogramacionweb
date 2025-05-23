@@ -74,13 +74,16 @@ const loginAlumno = (req, res) => {
 const getAlumnoById = (req, res) => {
   const idAlumno = Number(req.params.id);
 
-  const query = `
-SELECT Alumno.*, carrera.nombre AS carrera
-FROM Alumno
-JOIN carrera ON Alumno.id_carrera = carrera.id_carrera
-WHERE Alumno.id_alumno = ?;
+  if (isNaN(idAlumno)) {
+    return res.status(400).json({ error: 'ID de alumno inválido' });
+  }
 
-`;
+  const query = `
+    SELECT Alumno.*, carrera.nombre AS carrera
+    FROM Alumno
+    JOIN carrera ON Alumno.id_carrera = carrera.id_carrera
+    WHERE Alumno.id_alumno = ?;
+  `;
 
   db.query(query, [idAlumno], (err, results) => {
     if (err) {
@@ -95,6 +98,7 @@ WHERE Alumno.id_alumno = ?;
     res.status(200).json(results[0]);
   });
 };
+
 
 const asignarGrupo = (req, res) => {
   const { id_alumno, id_grupo } = req.body;
@@ -124,6 +128,29 @@ const obtenerGruposAlumno = (req, res) => {
   });
 };
 
+  const getAprobados = (req, res) => {
+  Estudiante.aprobados((err, results) => {
+    if (err) {
+      console.error('Error al obtener aprobados:', err);
+      return res.status(500).json({ error: 'Error al obtener aprobados' });
+    }
+    res.status(200).json(results);
+  });
+};
+
+
+
+  const getReprobados = (req, res) => {
+  Estudiante.reprobados((err, results) => {
+    if (err) {
+      console.error('Error al obtener reprobados:', err);
+      return res.status(500).json({ error: 'Error al obtener reprobados' });
+    }
+    res.status(200).json(results);
+  });
+};
+
+
 module.exports = {
   getStudents,
   createStudent,
@@ -132,6 +159,8 @@ module.exports = {
   loginAlumno,
   getAlumnoById, 
   asignarGrupo,
-  obtenerGruposAlumno
+  obtenerGruposAlumno,
+  getAprobados,
+  getReprobados
 };
 

@@ -15,6 +15,7 @@ const maestroRoutes= require('./routes/maestrosroutes');
 const periodoRoutes= require('./routes/periodoroutes');
 const calificacionRoutes = require('./routes/calificacionroutes');
 const adminRoutes = require('./routes/adminroutes');
+const aprobadosRoutes = require('./routes/aprobadosroutes');
 
 
 // Y luego las usa
@@ -27,6 +28,7 @@ app.use('/api', periodoRoutes);
 app.use('/api', calificacionRoutes);
 
 app.use('/api', adminRoutes);
+app.use('/api', aprobadosRoutes);
 
 
 // Arranca el servidor
