@@ -1,4 +1,5 @@
 const Grupo = require('../models/grupomodel.js');
+const db = require('../config/db');
 
 const getGroup = (req, res) => {
   Grupo.getAll((err, group) => {
@@ -101,56 +102,51 @@ const updateCalificacion = (req, res) => {
     res.status(200).json({ message: 'Calificación actualizada correctamente' });
   });
 };
-const getGruposPorCarrera = (req, res) => {
-  const idCarrera = req.query.idCarrera;
-  if (idCarrera) {
-    Grupo.getByCarrera(idCarrera, (err, grupos) => {
-      if (err) return res.status(500).json({ error: 'Error en la base de datos' });
-      res.json(grupos);
-    });
-  } else {
-    Grupo.getAll((err, grupos) => {
-      if (err) return res.status(500).json({ error: 'Error en la base de datos' });
-      res.json(grupos);
-    });
-  }
-};
+const getGruposConAlumnos = (req, res) => {
+  const sql = `
+    SELECT 
+      g.id_grupo,
+      g.nombre AS grupo,
+      ag.id_alumno_grupo,
+      a.nombre AS nombre
+    FROM grupo g
+    LEFT JOIN alumno_grupo ag ON g.id_grupo = ag.id_grupo
+    LEFT JOIN alumno a ON ag.id_alumno = a.id_alumno
+    ORDER BY g.id_grupo, a.nombre;
+  `;
 
-
-const db = require('../config/db');
-
-const getGruposConAlumnos = async (req, res) => {
-  const sqlGrupos = `SELECT id_grupo, nombre FROM grupo`;
-
-  db.query(sqlGrupos, async (err, grupos) => {
-    if (err) return res.status(500).json({ error: 'Error al obtener grupos' });
-
-    const resultado = [];
-
-    for (const grupo of grupos) {
-      const sqlAlumnos = `
-        SELECT a.nombre AS nombre, 'Alumno' AS rol, NULL AS avatar_url
-        FROM alumno a
-        JOIN alumno_grupo ag ON ag.id_alumno = a.id_alumno
-        WHERE ag.id_grupo = ?
-      `;
-
-      const alumnos = await new Promise((resolve, reject) => {
-        db.query(sqlAlumnos, [grupo.id_grupo], (err, rows) => {
-          if (err) reject(err);
-          else resolve(rows);
-        });
-      });
-
-      resultado.push({
-        grupo: grupo.nombre,
-        usuarios: alumnos
-      });
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error al obtener grupos con alumnos:', err);
+      return res.status(500).json({ error: 'Error al obtener grupos con alumnos' });
     }
 
-    res.json(resultado);
+    const gruposMap = {};
+
+    results.forEach(row => {
+      if (!gruposMap[row.grupo]) {
+        gruposMap[row.grupo] = [];
+      }
+
+      if (row.id_alumno_grupo) {
+        gruposMap[row.grupo].push({
+          id_alumno_grupo: row.id_alumno_grupo,
+          nombre: row.nombre,
+          rol: 'Alumno',
+          avatar_url: null
+        });
+      }
+    });
+
+    const salida = Object.entries(gruposMap).map(([grupo, usuarios]) => ({
+      grupo,
+      usuarios
+    }));
+
+    res.json(salida);
   });
 };
+
   const getByMateria = (req, res) => {
     const idMateria = req.params.id;
     Grupo.getByMateria(idMateria, (err, grupos) => {
@@ -161,6 +157,55 @@ const getGruposConAlumnos = async (req, res) => {
         res.status(200).json(grupos);
     });
   };
+
+const eliminarAlumnoDeGrupo = (req, res) => {
+  const idAlumnoGrupo = req.params.id;
+
+  const eliminarCalificaciones = 'DELETE FROM calificacion WHERE id_alumno_grupo = ?';
+  const eliminarAlumnoGrupo = 'DELETE FROM alumno_grupo WHERE id_alumno_grupo = ?';
+
+  db.query(eliminarCalificaciones, [idAlumnoGrupo], (err) => {
+    if (err) {
+      console.error('Error al eliminar calificaciones:', err);
+      return res.status(500).json({ error: 'Error al eliminar calificaciones' });
+    }
+
+    db.query(eliminarAlumnoGrupo, [idAlumnoGrupo], (err2) => {
+      if (err2) {
+        console.error('Error al eliminar alumno del grupo:', err2);
+        return res.status(500).json({ error: 'Error al eliminar alumno del grupo' });
+      }
+
+      res.status(200).json({ message: 'Alumno eliminado del grupo y calificaciones eliminadas' });
+    });
+  });
+};
+
+
+const getGruposPorCarrera = (req, res) => {
+  const idCarrera = req.query.idCarrera;
+
+  const query = `
+    SELECT 
+      g.id_grupo,
+      g.nombre AS grupo,
+      g.horario,
+      m.nombre AS materia,
+      c.nombre AS carrera
+    FROM grupo g
+    JOIN materia m ON g.id_materia = m.id_materia
+    JOIN carrera c ON m.id_carrera = c.id_carrera
+    WHERE c.id_carrera = ?
+  `;
+
+  db.query(query, [idCarrera], (err, results) => {
+    if (err) {
+      console.error('Error al obtener grupos por carrera:', err);
+      return res.status(500).json({ error: 'Error al obtener grupos por carrera' });
+    }
+    res.status(200).json(results);
+  });
+};
 
 
 
@@ -174,6 +219,7 @@ module.exports = {
   getAlumnosByGrupo,
   getAlumnosConCalificaciones,
   updateCalificacion,
-  getGruposPorCarrera,
-  getGruposConAlumnos
+  getGruposConAlumnos,
+  eliminarAlumnoDeGrupo,
+  getGruposPorCarrera
 };

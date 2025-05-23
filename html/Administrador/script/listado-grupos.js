@@ -27,7 +27,7 @@ async function cargarGrupos() {
                     <span class="user-subhead">${user.rol}</span>
                   </td>
                   <td style="width: 20%;">
-                    <a href="#" class="table-link danger">
+                    <a href="#" class="table-link danger" onclick="eliminarAlumnoGrupo(${user.id_alumno_grupo})">
                       <span class="fa-stack">
                         <i class="fa fa-square fa-stack-2x"></i>
                         <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
@@ -50,3 +50,22 @@ async function cargarGrupos() {
 }
 
 window.onload = cargarGrupos;
+
+async function eliminarAlumnoGrupo(id) {
+  if (!confirm('¿Seguro que deseas eliminar este alumno del grupo?')) return;
+
+  try {
+    const res = await fetch(`http://localhost:3000/api/alumno-grupo/${id}`, {
+      method: 'DELETE',
+    });
+
+    const data = await res.json();
+    alert(data.message);
+
+    cargarGrupos();
+
+  } catch (error) {
+    console.error('Error al eliminar alumno del grupo:', error);
+    alert('Ocurrió un error al eliminar el alumno del grupo.');
+  }
+}
