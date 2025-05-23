@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function cargarCarreras() {
     try {
-      const res = await fetch('http://localhost:3000/api/carrera');
+      const res = await fetch('http://localhost:3000/api/carreras');
       if (!res.ok) throw new Error('Error al cargar carreras');
       const carreras = await res.json();
       carreraSelect.innerHTML = '<option value="">Seleccione una carrera</option>';

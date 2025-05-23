@@ -15,3 +15,4 @@ document.addEventListener('DOMContentLoaded', () => {
       resultado.textContent = 'Error al obtener los datos: ' + error.message;
     });
 });
+//ok
