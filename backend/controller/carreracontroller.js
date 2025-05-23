@@ -1,13 +1,15 @@
 const Carrera = require('../models/carreramodel.js');
+const db = require('../config/db'); // ✅ Solo una vez
 
-const getCarrera= (req, res) => {
-  Carrera.getAll((err, carreras) => {
+const getCarreras = (req, res) => {
+  const sql = 'SELECT * FROM carrera';
+
+  db.query(sql, (err, results) => {
     if (err) {
-      console.error('Error al obtener la carrera:', err);
-      return res.status(500).json({ error: 'Error al obtener la carrera' });
+      console.error('Error al obtener carreras:', err);
+      return res.status(500).json({ error: 'Error al obtener carreras' });
     }
-    res.status(200).json(carreras);
-    console.log('Carreras obtenidas:', carreras);
+    res.status(200).json(results);
   });
 };
 
@@ -25,14 +27,12 @@ const createCarrera = (req, res) => {
   });
 };
 
-
-
 // UPDATE
 const updateCarrera = (req, res) => {
   const id = req.params.id;
   const actualizado = req.body;
   Carrera.update(id, actualizado, (err, result) => {
-    if (err) return res.status(500).json({ error: 'Error al actualizar Carrera' });
+    if (err) return res.status(500).json({ error: 'Error al actualizar carrera' });
     res.status(200).json({ message: 'Carrera actualizada' });
   });
 };
@@ -45,9 +45,6 @@ const deleteCarrera = (req, res) => {
     res.status(200).json({ message: 'Carrera eliminada' });
   });
 };
-
-const db = require('../config/db');
-
 
 const getCarrerasPorProfesor = (req, res) => {
   const idProfesor = req.params.id;
@@ -67,12 +64,10 @@ const getCarrerasPorProfesor = (req, res) => {
   });
 };
 
-
-
 module.exports = {
-  getCarrera,
+  getCarreras,
   createCarrera,
   updateCarrera,
   deleteCarrera,
-  getCarrerasPorProfesor
+  getCarrerasPorProfesor,
 };

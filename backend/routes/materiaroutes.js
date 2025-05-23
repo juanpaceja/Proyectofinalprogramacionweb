@@ -1,5 +1,4 @@
 const express = require('express');
-
 const router = express.Router();
 
 const MateriaController = require('../controller/materiacontroller.js');
@@ -12,9 +11,8 @@ router.post('/materia', (req, res, next) => {
 
 router.put('/materia/:id', MateriaController.updateMateria);
 router.delete('/materia/:id', MateriaController.deleteMateria);
-
 router.get('/materia/carrera/:id', MateriaController.getByCarrera);
 router.get('/materia/maestro/:id', MateriaController.getByMaestro);
+router.get('/materias-con-carrera', MateriaController.getMateriasConCarrera);
 
 module.exports = router;
-

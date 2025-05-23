@@ -80,6 +80,26 @@ const getByMaestro = (req, res) => {
   });
 };
 
+const getMateriasConCarrera = (req, res) => {
+  const sql = `
+    SELECT 
+      m.nombre AS nombre,
+      m.codigo,
+      m.creditos,
+      c.nombre AS carrera
+    FROM materia m
+    JOIN carrera c ON m.id_carrera = c.id_carrera
+  `;
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error al obtener materias con carrera:', err);
+      return res.status(500).json({ error: 'Error al obtener materias con carrera' });
+    }
+    res.status(200).json(results);
+  });
+};
+
 
 
 module.exports = {
@@ -88,5 +108,6 @@ module.exports = {
   updateMateria,
   deleteMateria,
   getByCarrera,
-  getByMaestro
+  getByMaestro,
+  getMateriasConCarrera
 };
