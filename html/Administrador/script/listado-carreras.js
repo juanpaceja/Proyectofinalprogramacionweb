@@ -23,11 +23,6 @@ async function cargarCarreras() {
               <td><span class="user-link">${carrera.facultad}</span></td>
               <td style="width: 20%;">
                 <a href="#" class="table-link danger">
-                  <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
               </td>
             </tr>
           </tbody>
