@@ -3,7 +3,7 @@ const Aprobado = {
 
   aprobados: (callback) => {
   const query = `
-    SELECT
+    SELECT DISTINCT
       a.nombre AS alumno,
       p.nombre AS semestre,
       ca.nombre AS carrera,
