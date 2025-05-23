@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(`http://localhost:3000/api/calificaciones/actual/${idAlumno}`)
         .then(res => res.json())
         .then(data => {
+          const nombreSemestre = data[0].semestre || '';
+    document.getElementById('semestre-actual').textContent = `| ${nombreSemestre}`;
+
         const tbody = document.getElementById('table-content');
         data.forEach(item => {
           const row = document.createElement('tr');
