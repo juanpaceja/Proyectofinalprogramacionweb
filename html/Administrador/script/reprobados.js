@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const resultado = document.getElementById('resultado');
 
-  fetch('http://localhost:3000/api/aprobados')
+  fetch('http://localhost:3000/api/reprobados')
     .then(response => {
       if (!response.ok) {
         return response.text().then(text => { throw new Error(text); });
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(data => {
       if (!Array.isArray(data) || data.length === 0) {
-        resultado.innerHTML = '<p class="text-muted">No se encontraron alumnos aprobados.</p>';
+        resultado.innerHTML = '<p class="text-muted">No se encontraron alumnos reprobados.</p>';
         return;
       }
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${item.materia}</td>
           <td>${item.semestre || item.periodo || '—'}</td>
           <td>${item.calificacion}</td>
-       
+          
         </tr>
       `).join('');
 
@@ -49,5 +49,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function verPDF() {
-  window.open('http://localhost:3000/api/reportes/aprobados', '_blank');
+  window.open('http://localhost:3000/api/reportes/reprobados', '_blank');
 }
