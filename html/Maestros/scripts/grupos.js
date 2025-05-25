@@ -1,8 +1,13 @@
-const profesorId = localStorage.getItem('id_profesor');
+const idMateria = localStorage.getItem('id_materia');
 
 window.addEventListener('DOMContentLoaded', async () => {
   try {
-    const response = await fetch(`http://localhost:3000/api/grupos/materia/${profesorId}`);
+    if (!idMateria) {
+  document.getElementById('grupos-cards').innerHTML = '<p class="text-danger">ID de materia no encontrado.</p>';
+  return;
+}
+    console.log('ID de materia:', idMateria);
+    const response = await fetch(`http://localhost:3000/api/grupos/materia/${idMateria}`);
     if (!response.ok) throw new Error('Error al obtener grupos');
 
     const grupos = await response.json();
