@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grupos.forEach(grupo => {
         const option = document.createElement('option');
         option.value = grupo.id_grupo;
-        option.textContent = `${grupo.nombre_grupo} - ${grupo.nombre_materia} (${grupo.horario})`;
+        option.textContent = `${grupo.grupo} - ${grupo.materia} (${grupo.horario})`;
         grupoSelect.appendChild(option);
       });
     } catch (error) {
