@@ -11,6 +11,34 @@
       crossorigin="anonymous"
     />
     <style>
+      nav.navbar {
+      background-color: #006341 !important; /* verde exacto */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    h2.navbar-brand {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+h2.navbar-brand:hover,
+h2.navbar-brand:focus {
+  color: #fff !important;
+  cursor: default;
+}
+
+    h2.navbar-brand {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
       body {
         background-color: #f8f9fa;
         font-family: 'Segoe UI', sans-serif;
@@ -54,20 +82,34 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-success p-0 pt-3 pb-3">
-        <div class="container-fluid">
-            <h2 class="navbar-brand">Universidad de colima | Maestros</h2>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div id="mimenu" class="navbar-nav ms-auto">
-                    <a class="nav-link active ms-auto" id="registro" href="inicio-maestro.html">Inicio</a>
-                </div>
-            </div>
+    <nav class="navbar navbar-expand-lg fixed-top p-3">
+    <div class="container-fluid">
+      <h2 class="navbar-brand">
+        <i class="bi bi-house-door"></i> Universidad de Colima | Maestro
+      </h2>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active ms-auto text-white fw-semibold" href="inicio-maestro.html">Inicio</a>
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
     <main>
+      <div class="container">
+        <h1 class="text-center" id="materia-grupos">
+          Grupo
+        </h1>
       <!-- Table 1 - Bootstrap Brain Component -->
       <section class="py-3 py-md-5">
         <div class="container">
@@ -75,7 +117,7 @@
             <div class="col-12 col-lg-9 col-xl-8">
               <div class="card widget-card border-light shadow-sm">
                 <div class="card-body p-4">
-                  <h5 class="card-title widget-card-title mb-4">carrera | materia | Grupo</h5>
+                  <h5 class="card-title widget-card-title mb-4"></h5>
                   <div class="table-responsive">
                     <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
                       <thead>
