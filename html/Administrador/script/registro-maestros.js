@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const admin = localStorage.getItem('admin');
 
   if (!admin) {
+    alert('Acceso no autorizado. Inicia sesión como Administrador.');
     window.location.replace('/html/login.html');
     return;
   }

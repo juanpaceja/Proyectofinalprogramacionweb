@@ -1,12 +1,22 @@
-const profesorId = localStorage.getItem('id_profesor');
+document.addEventListener('DOMContentLoaded', async () => {
+  const maestroStr = localStorage.getItem('maestro');
 
-if (!profesorId) {
-  alert('Inicia sesión primero');
-  window.location.href = '/html/inicio-registro/index.html';
-}
+  if (!maestroStr) {
+    alert('Acceso no autorizado. Inicia sesión como maestro.');
+    window.location.href = '/html/login.html';
+    return;
+  }
 
+  const maestro = JSON.parse(maestroStr);
+  const profesorId = maestro.id_profesor;
 
-window.addEventListener('DOMContentLoaded', async () => {
+  if (!profesorId) {
+    alert('ID de profesor no encontrado. Inicia sesión nuevamente.');
+    localStorage.removeItem('maestro');
+    window.location.href = '/html/login.html';
+    return;
+  }
+
   try {
     const response = await fetch(`http://localhost:3000/api/carreras/profesor/${profesorId}`);
     if (!response.ok) throw new Error('Error al obtener carreras');
@@ -34,3 +44,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('carreras-cards').innerHTML = '<p class="text-danger">Error al cargar las carreras.</p>';
   }
 });
+
+function cerrarSesionMaestro() {
+  localStorage.removeItem('maestro');
+  localStorage.removeItem('id_profesor');
+  window.location.href = '/html/login.html';
+}

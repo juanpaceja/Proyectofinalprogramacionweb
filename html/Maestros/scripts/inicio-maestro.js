@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const maestroStr = localStorage.getItem('maestro');
+
   if (!maestroStr) {
-    alert('No hay sesión iniciada');
+    alert('Acceso no autorizado. Inicia sesión como maestro.');
     window.location.href = '/html/login.html';
     return;
   }
@@ -20,13 +21,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const data = await response.json();
 
-    document.getElementById('nombre-maestro').textContent = maestro.nombre || 'Sin nombre';
+    const nombreElemento = document.getElementById('nombre-maestro');
+    if (nombreElemento) {
+      nombreElemento.textContent = data.nombre || maestro.nombre || 'Sin nombre';
+    }
 
-    // Si tienes imagen dinámica, cambia src del img-alumno
-    // document.getElementById('img-alumno').src = data.url_imagen || '/imagenes/Ejemplo-img-alumno.jpg';
 
   } catch (error) {
     console.error(error);
     alert('No se pudo cargar la información del profesor');
+    localStorage.removeItem('maestro');
+    localStorage.removeItem('id_profesor');
+    window.location.href = '/html/login.html';
   }
 });
+
+function cerrarSesionMaestro() {
+  localStorage.removeItem('maestro');
+  localStorage.removeItem('id_profesor');
+  window.location.href = '/html/login.html';
+}

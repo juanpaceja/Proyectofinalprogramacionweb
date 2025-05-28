@@ -1,6 +1,22 @@
-const profesorId = localStorage.getItem('id_profesor');
+document.addEventListener('DOMContentLoaded', async () => {
+  const maestroStr = localStorage.getItem('maestro');
 
-window.addEventListener('DOMContentLoaded', async () => {
+  if (!maestroStr) {
+    alert('Acceso no autorizado. Inicia sesión como maestro.');
+    window.location.href = '/html/login.html';
+    return;
+  }
+
+  const maestro = JSON.parse(maestroStr);
+  const profesorId = maestro.id_profesor;
+
+  if (!profesorId) {
+    alert('ID de profesor no encontrado. Inicia sesión nuevamente.');
+    localStorage.removeItem('maestro');
+    window.location.href = '/html/login.html';
+    return;
+  }
+
   try {
     const response = await fetch(`http://localhost:3000/api/materia/maestro/${profesorId}`);
     if (!response.ok) throw new Error('Error al obtener materias');
@@ -25,19 +41,23 @@ window.addEventListener('DOMContentLoaded', async () => {
     });
 
     // Delegación de eventos para los botones "Ver grupos"
-container.addEventListener('click', (e) => {
-
-  if (e.target.classList.contains('ver-grupos-btn')) {
-    e.preventDefault();
-    const idMateria = e.target.getAttribute('data-id');
-    console.log('Guardando id_materia:', idMateria);
-    localStorage.setItem('id_materia', idMateria);
-    window.location.href = '/html/maestros/grupos.html';
-  }
-});
+    container.addEventListener('click', (e) => {
+      if (e.target.classList.contains('ver-grupos-btn')) {
+        e.preventDefault();
+        const idMateria = e.target.getAttribute('data-id');
+        localStorage.setItem('id_materia', idMateria);
+        window.location.href = '/html/maestros/grupos.html';
+      }
+    });
 
   } catch (error) {
     console.error(error);
     document.getElementById('materias-cards').innerHTML = '<p class="text-danger">Error al cargar materias.</p>';
   }
 });
+
+function cerrarSesionMaestro() {
+  localStorage.removeItem('maestro');
+  localStorage.removeItem('id_profesor');
+  window.location.href = '/html/login.html';
+}

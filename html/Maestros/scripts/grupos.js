@@ -1,12 +1,20 @@
-const idMateria = localStorage.getItem('id_materia');
+document.addEventListener('DOMContentLoaded', async () => {
+  // Verificar que haya sesión de maestro
+  const maestroStr = localStorage.getItem('maestro');
+  if (!maestroStr) {
+    alert('Acceso no autorizado. Inicia sesión como maestro.');
+    window.location.href = '/html/login.html';
+    return;
+  }
 
-window.addEventListener('DOMContentLoaded', async () => {
+  // Obtener id_materia
+  const idMateria = localStorage.getItem('id_materia');
+  if (!idMateria) {
+    document.getElementById('grupos-cards').innerHTML = '<p class="text-danger">ID de materia no encontrado.</p>';
+    return;
+  }
+
   try {
-    if (!idMateria) {
-  document.getElementById('grupos-cards').innerHTML = '<p class="text-danger">ID de materia no encontrado.</p>';
-  return;
-}
-    console.log('ID de materia:', idMateria);
     const response = await fetch(`http://localhost:3000/api/grupos/materia/${idMateria}`);
     if (!response.ok) throw new Error('Error al obtener grupos');
 
@@ -34,13 +42,13 @@ window.addEventListener('DOMContentLoaded', async () => {
       container.appendChild(card);
     });
 
-    // Listener fuera del forEach
+    // Delegación de eventos para "Ver alumnos"
     container.addEventListener('click', (e) => {
       if (e.target.classList.contains('ver-alumnos-btn')) {
         e.preventDefault();
         const idGrupo = e.target.getAttribute('data-id');
         localStorage.setItem('id_grupo', idGrupo);
-        window.location.href = '/html/maestros/grupo.html'; // Aquí la ruta correcta a tu página de alumnos
+        window.location.href = '/html/maestros/grupo.html'; // Ruta correcta
       }
     });
 
@@ -49,3 +57,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('grupos-cards').innerHTML = '<p class="text-danger">Error al cargar los grupos.</p>';
   }
 });
+
+function cerrarSesionMaestro() {
+  localStorage.removeItem('maestro');
+  localStorage.removeItem('id_profesor');
+  window.location.href = '/html/login.html';
+}

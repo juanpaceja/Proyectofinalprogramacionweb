@@ -1,9 +1,8 @@
-// Verifica si el admin está logueado
 document.addEventListener('DOMContentLoaded', () => {
   const admin = localStorage.getItem('admin');
 
   if (!admin) {
-    // Si no hay sesión activa, redirige al login
+    alert('Acceso no autorizado. Inicia sesión como Administrador.');
     window.location.replace('/html/login.html');
     return;
   }
