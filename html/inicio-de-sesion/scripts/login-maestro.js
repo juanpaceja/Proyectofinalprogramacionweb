@@ -2,6 +2,10 @@ window.addEventListener('DOMContentLoaded', () => {
     localStorage.clear();
 });
 
+window.addEventListener('DOMContentLoaded', () => {
+    localStorage.clear();
+});
+
 document.getElementById('login-form-maestros').addEventListener('submit', async function(event) {
     event.preventDefault();
 

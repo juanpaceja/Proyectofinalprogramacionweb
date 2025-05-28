@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!admin) {
     alert('Acceso no autorizado. Inicia sesión como Administrador.');
-    window.location.replace('/html/login.html');
+    window.location.replace('/html/inicio.html');
     return;
   }
 

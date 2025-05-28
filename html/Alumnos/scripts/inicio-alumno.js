@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (!alumnoStr) {
     alert('Acceso no autorizado. Inicia sesión como alumno.');
-    window.location.href = '/html/inicio.html'; // Cambia si tu login está en otra ruta
+    window.location.href = '/html/inicio.html';
     return;
   }
 

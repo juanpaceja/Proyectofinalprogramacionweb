@@ -1,3 +1,7 @@
+window.addEventListener('DOMContentLoaded', () => {
+    localStorage.clear();
+});
+
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.querySelector('.row.g-4');
 

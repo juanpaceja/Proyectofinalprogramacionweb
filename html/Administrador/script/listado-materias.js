@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const contenedor = document.getElementById('contenedor-materias');
     if (!contenedor) return;
 
-    contenedor.innerHTML = ''; // Limpiar contenido
+    contenedor.innerHTML = '';
 
     try {
       const res = await fetch('http://localhost:3000/api/materias-con-carrera');
