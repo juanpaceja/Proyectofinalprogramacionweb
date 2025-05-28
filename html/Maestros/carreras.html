@@ -11,6 +11,35 @@
     crossorigin="anonymous"
   />
   <style>
+
+    nav.navbar {
+      background-color: #006341 !important; /* verde exacto */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    h2.navbar-brand {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+h2.navbar-brand:hover,
+h2.navbar-brand:focus {
+  color: #fff !important;
+  cursor: default;
+}
+
+    h2.navbar-brand {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
     body {
       background-color: #f8f9fa;
       font-family: 'Segoe UI', sans-serif;
@@ -44,9 +73,11 @@
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg bg-success p-0 pt-3 pb-3">
+  <nav class="navbar navbar-expand-lg fixed-top p-3">
     <div class="container-fluid">
-      <h2 class="navbar-brand text-white">Universidad de colima | Maestros</h2>
+      <h2 class="navbar-brand">
+        <i class="bi bi-house-door"></i> Universidad de Colima | Maestro
+      </h2>
       <button
         class="navbar-toggler"
         type="button"
@@ -58,14 +89,9 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div id="mimenu" class="navbar-nav ms-auto">
-          <a
-            class="nav-link active ms-auto text-white fw-semibold"
-            id="registro"
-            href="inicio-maestro.html"
-            >Inicio</a
-          >
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active ms-auto text-white fw-semibold" href="inicio-maestro.html">Inicio</a>
         </div>
       </div>
     </div>
@@ -75,94 +101,7 @@
       <h1 class="text-center" id="titulo-carreras">Carreras</h1>
 
       <div class="row row-cols-1 row-cols-md-3 g-4" id="carreras-cards">
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Carrera 1</h5>
-              <p class="card-text flex-grow-1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                tenetur laboriosam ullam odio dolore? Modi error, corporis
-                doloremque, iure ex alias soluta perferendis reprehenderit
-                ratione accusantium eos voluptate voluptates enim!
-              </p>
-              <a href="#" class="btn btn-primary mt-auto">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Carrera 2</h5>
-              <p class="card-text flex-grow-1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                tenetur laboriosam ullam odio dolore? Modi error, corporis
-                doloremque, iure ex alias soluta perferendis reprehenderit
-                ratione accusantium eos voluptate voluptates enim!
-              </p>
-              <a href="#" class="btn btn-primary mt-auto">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Carrera 3</h5>
-              <p class="card-text flex-grow-1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                tenetur laboriosam ullam odio dolore? Modi error, corporis
-                doloremque, iure ex alias soluta perferendis reprehenderit
-                ratione accusantium eos voluptate voluptates enim!
-              </p>
-              <a href="#" class="btn btn-primary mt-auto">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Carrera 4</h5>
-              <p class="card-text flex-grow-1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                tenetur laboriosam ullam odio dolore? Modi error, corporis
-                doloremque, iure ex alias soluta perferendis reprehenderit
-                ratione accusantium eos voluptate voluptates enim!
-              </p>
-              <a href="#" class="btn btn-primary mt-auto">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Carrera 5</h5>
-              <p class="card-text flex-grow-1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                tenetur laboriosam ullam odio dolore? Modi error, corporis
-                doloremque, iure ex alias soluta perferendis reprehenderit
-                ratione accusantium eos voluptate voluptates enim!
-              </p>
-              <a href="#" class="btn btn-primary mt-auto">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Carrera 6</h5>
-              <p class="card-text flex-grow-1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                tenetur laboriosam ullam odio dolore? Modi error, corporis
-                doloremque, iure ex alias soluta perferendis reprehenderit
-                ratione accusantium eos voluptate voluptates enim!
-              </p>
-              <a href="#" class="btn btn-primary mt-auto">Go somewhere</a>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   </main>
