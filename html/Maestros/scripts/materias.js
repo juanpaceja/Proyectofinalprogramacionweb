@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (!maestroStr) {
     alert('Acceso no autorizado. Inicia sesión como maestro.');
-    window.location.href = '/html/login.html';
+    window.location.href = '/html/inicio.html';
     return;
   }
 

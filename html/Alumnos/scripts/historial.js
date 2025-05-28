@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!alumnoStr || !idAlumno) {
     alert('Acceso no autorizado. Inicia sesión como alumno.');
-    window.location.href = '/html/login.html'; // Ajusta según la ruta real
+    window.location.href = '/html/inicio.html'; // Ajusta según la ruta real
     return;
   }
 
@@ -70,5 +70,5 @@ document.addEventListener('DOMContentLoaded', () => {
 function cerrarSesionAlumno() {
   localStorage.removeItem('alumno');
   localStorage.removeItem('id_alumno');
-  window.location.href = '/html/login.html'; // o la página correcta
+  window.location.href = '/html/inicio.html'; // o la página correcta
 }
