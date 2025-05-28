@@ -1,9 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { 
+  const alumnoStr = localStorage.getItem('alumno');
   const idAlumno = localStorage.getItem('id_alumno');
 
-  if (!idAlumno) {
-    alert('Debes iniciar sesión primero');
-    window.location.href = '/login.html';
+  if (!alumnoStr || !idAlumno) {
+    alert('Acceso no autorizado. Inicia sesión como alumno.');
+    window.location.href = '/html/login.html'; // Ajusta según la ruta real
     return;
   }
 
@@ -17,10 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const porSemestre = {};
 
       data.forEach(item => {
-        const semestre = item.semestre;
-        if (!porSemestre[semestre]) {
-          porSemestre[semestre] = [];
-        }
+        const semestre = item.semestre || 'Semestre desconocido';
+        if (!porSemestre[semestre]) porSemestre[semestre] = [];
         porSemestre[semestre].push(item);
       });
 
@@ -64,5 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => {
       console.error('Error al cargar historial:', error);
+      alert('No se pudieron cargar las calificaciones');
     });
 });
+
+function cerrarSesionAlumno() {
+  localStorage.removeItem('alumno');
+  localStorage.removeItem('id_alumno');
+  window.location.href = '/html/login.html'; // o la página correcta
+}

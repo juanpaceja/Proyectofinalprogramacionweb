@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  // Obtén el id del alumno guardado en localStorage (de tu login)
   const alumnoStr = localStorage.getItem('alumno');
+
   if (!alumnoStr) {
-    alert('No hay sesión iniciada');
-    window.location.href = '/html/login.html'; // Cambia a tu página de login
+    alert('Acceso no autorizado. Inicia sesión como alumno.');
+    window.location.href = '/html/inicio.html'; // Cambia si tu login está en otra ruta
     return;
   }
 
@@ -23,12 +23,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('nombre-alumno').textContent = data.nombre || 'Sin nombre';
     document.getElementById('Nocuenta-alumno').textContent = `Número de cuenta: ${data.matricula || 'No disponible'}`;
     document.getElementById('carrera-alumno').textContent = `Carrera: ${data.carrera || 'No disponible'}`;
-  
-    // Si tienes imagen dinámica, cambia src del img-alumno
-    // document.getElementById('img-alumno').src = data.url_imagen || '/imagenes/Ejemplo-img-alumno.jpg';
 
   } catch (error) {
-    console.error(error);
+    console.error('Error al cargar la información del alumno:', error);
     alert('No se pudo cargar la información del alumno');
   }
 });
+
+function cerrarSesionAlumno() {
+  localStorage.removeItem('alumno');
+  localStorage.removeItem('id_alumno');
+  window.location.href = '/html/inicio.html';
+}

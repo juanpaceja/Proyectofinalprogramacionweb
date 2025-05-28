@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const alumnoStr = localStorage.getItem('alumno');
+
+  if (!alumnoStr) {
+    alert('Acceso no autorizado. Inicia sesión como alumno.');
+    window.location.href = '/html/inicio.html'; // Asegúrate que esta ruta sea correcta
+    return;
+  }
+
+document.addEventListener('DOMContentLoaded', () => {
     const idAlumno = localStorage.getItem('id_alumno'); // 👈 Recupera el ID guardado
     
     if (!idAlumno) {
@@ -26,3 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(error => console.error('Error al cargar calificaciones:', error));
   });
+});
+
+function cerrarSesionAlumno() {
+  localStorage.removeItem('alumno');
+  localStorage.removeItem('id_alumno');
+  window.location.href = '/html/inicio.html';
+}
