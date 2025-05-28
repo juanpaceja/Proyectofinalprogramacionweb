@@ -132,9 +132,9 @@ getByCarrera: (idCarrera, callback) => {
   const query = `
     SELECT 
       grupo.id_grupo,
-      grupo.nombre AS nombre_grupo,
+      grupo.nombre AS grupo,
       grupo.horario,
-      materia.nombre AS nombre_materia,
+      materia.nombre AS materia,
       periodo_academico.nombre AS nombre_periodo,
       profesor.nombre AS nombre_profesor
     FROM grupo
