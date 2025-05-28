@@ -16,10 +16,9 @@ router.get('/grupos/:id/alumnos-calificaciones', grupoController.getAlumnosConCa
 router.put('/calificacion', grupoController.updateCalificacion);
 router.get('/grupos-usuarios', grupoController.getGruposConAlumnos);
 router.delete('/alumno-grupo/:id', grupoController.eliminarAlumnoDeGrupo);
+router.put('/alumno-grupo/:id', grupoController.actualizarGrupoAlumno);
+
 
 
 
 module.exports = router;
-
-
-

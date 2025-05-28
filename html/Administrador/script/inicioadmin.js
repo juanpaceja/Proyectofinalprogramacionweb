@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const adminStr = localStorage.getItem('admin');
   if (!adminStr) {
-    alert('No hay sesión iniciada');
-    window.location.href = '/html/login.html';
+    window.location.replace('/html/login.html');
     return;
   }
 
@@ -20,14 +19,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const data = await response.json();
 
-   document.getElementById('nombre-admin').textContent = data.nombre || admin.nombre || 'Sin nombre';
+    document.getElementById('nombre-admin').textContent = data.nombre || admin.nombre || 'Sin nombre';
 
-
-    // Si tienes imagen dinámica, cambia src del img-alumno
-    // document.getElementById('img-alumno').src = data.url_imagen || '/imagenes/Ejemplo-img-alumno.jpg';
 
   } catch (error) {
     console.error(error);
     alert('No se pudo cargar la información del administrador');
   }
 });
+
+function cerrarSesion() {
+  localStorage.removeItem('admin');
+  localStorage.removeItem('id_admin');
+  window.location.href = '/html/inicio.html';
+}

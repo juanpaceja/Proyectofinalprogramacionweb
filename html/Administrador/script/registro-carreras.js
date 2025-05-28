@@ -1,3 +1,11 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    window.location.replace('/html/login.html');
+    return;
+  }
+
 document.getElementById('btn-registro-carreras').addEventListener('click', function(e) {
   e.preventDefault();
 
@@ -21,3 +29,4 @@ document.getElementById('btn-registro-carreras').addEventListener('click', funct
   });
 });
 
+});

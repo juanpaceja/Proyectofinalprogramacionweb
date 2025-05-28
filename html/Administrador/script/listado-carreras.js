@@ -1,6 +1,16 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    window.location.replace('/html/login.html');
+    return;
+  }
+  cargarCarreras();
+});
+
 async function cargarCarreras() {
   const contenedor = document.getElementById('contenedor-carreras');
-  contenedor.innerHTML = ''; // Limpiar contenido
+  contenedor.innerHTML = '';
 
   try {
     const res = await fetch('http://localhost:3000/api/carreras');
@@ -22,7 +32,7 @@ async function cargarCarreras() {
             <tr>
               <td><span class="user-link">${carrera.facultad}</span></td>
               <td style="width: 20%;">
-                <a href="#" class="table-link danger">
+                <a href="#" class="table-link danger"></a>
               </td>
             </tr>
           </tbody>
@@ -37,4 +47,8 @@ async function cargarCarreras() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', cargarCarreras);
+function cerrarSesion() {
+  localStorage.removeItem('admin');
+  localStorage.removeItem('id_admin');
+  window.location.href = '/html/inicio.html';
+}

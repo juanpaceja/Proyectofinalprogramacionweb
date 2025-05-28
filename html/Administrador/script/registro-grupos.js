@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    window.location.replace('/html/login.html');
+    return;
+  }
+
   cargarCarreras();
   cargarPeriodos();
   cargarProfesores();
@@ -72,10 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Cargar carreras
+// ====================== FUNCIONES AUXILIARES ======================
+
 async function cargarCarreras() {
   const loading = document.getElementById('loadingCarreras');
-  loading.style.display = 'inline';
+  if (loading) loading.style.display = 'inline';
 
   try {
     const res = await fetch('http://localhost:3000/api/carreras');
@@ -91,17 +99,16 @@ async function cargarCarreras() {
       select.appendChild(option);
     });
 
-    loading.style.display = 'none';
+    if (loading) loading.style.display = 'none';
   } catch (err) {
     console.error('Error al cargar carreras', err);
-    loading.textContent = 'Error al cargar carreras';
+    if (loading) loading.textContent = 'Error al cargar carreras';
   }
 }
 
-// Cargar materias por carrera
 async function cargarMateriasPorCarrera(idCarrera) {
   const loading = document.getElementById('loadingMaterias');
-  loading.style.display = 'inline';
+  if (loading) loading.style.display = 'inline';
 
   try {
     const res = await fetch('http://localhost:3000/api/materia');
@@ -120,17 +127,16 @@ async function cargarMateriasPorCarrera(idCarrera) {
         select.appendChild(option);
       });
 
-    loading.style.display = 'none';
+    if (loading) loading.style.display = 'none';
   } catch (err) {
     console.error('Error al cargar materias', err);
-    loading.textContent = 'Error al cargar materias';
+    if (loading) loading.textContent = 'Error al cargar materias';
   }
 }
 
-// Cargar periodos
 async function cargarPeriodos() {
   const loading = document.getElementById('loadingPeriodos');
-  loading.style.display = 'inline';
+  if (loading) loading.style.display = 'inline';
 
   try {
     const res = await fetch('http://localhost:3000/api/periodo');
@@ -147,17 +153,16 @@ async function cargarPeriodos() {
       select.appendChild(option);
     });
 
-    loading.style.display = 'none';
+    if (loading) loading.style.display = 'none';
   } catch (err) {
     console.error('Error al cargar periodos', err);
-    loading.textContent = 'Error al cargar periodos';
+    if (loading) loading.textContent = 'Error al cargar periodos';
   }
 }
 
-// Cargar profesores
 async function cargarProfesores() {
   const loading = document.getElementById('loadingProfesores');
-  loading.style.display = 'inline';
+  if (loading) loading.style.display = 'inline';
 
   try {
     const res = await fetch('http://localhost:3000/api/maestros');
@@ -174,9 +179,9 @@ async function cargarProfesores() {
       select.appendChild(option);
     });
 
-    loading.style.display = 'none';
+    if (loading) loading.style.display = 'none';
   } catch (err) {
     console.error('Error al cargar profesores', err);
-    loading.textContent = 'Error al cargar profesores';
+    if (loading) loading.textContent = 'Error al cargar profesores';
   }
-};
+}

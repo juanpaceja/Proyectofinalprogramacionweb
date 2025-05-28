@@ -1,5 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  cargarCarreras();
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    window.location.replace('/html/login.html');
+    return;
+  }
+
+  cargarCarreras(); // Llamar directamente
 
   const formulario = document.getElementById('form-materia');
   formulario.addEventListener('submit', async (e) => {
@@ -13,43 +20,41 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const res = await fetch('http://localhost:3000/api/materia', { // ruta para crear materia
+      const res = await fetch('http://localhost:3000/api/materia', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datos)
       });
 
       const resBody = await res.json();
-
       if (!res.ok) throw new Error('Error al registrar materia');
-
 
       alert('Materia registrada con éxito');
       formulario.reset();
-      
+
     } catch (err) {
       console.error(err);
       alert('Hubo un problema al registrar la materia');
     }
   });
-});
 
-async function cargarCarreras() {
-  try {
-    const res = await fetch('http://localhost:3000/api/carreras');
-    if (!res.ok) throw new Error('Error al cargar carreras');
-    const carreras = await res.json();
+  async function cargarCarreras() {
+    try {
+      const res = await fetch('http://localhost:3000/api/carreras');
+      if (!res.ok) throw new Error('Error al cargar carreras');
+      const carreras = await res.json();
 
-    const carreraSelect = document.getElementById('Select-carrera');
-    carreraSelect.innerHTML = '<option value="">Seleccione una carrera</option>';
-    carreras.forEach(carrera => {
-      const option = document.createElement('option');
-      option.value = carrera.id_carrera; // si tu API responde así
-      option.textContent = carrera.nombre;
-      carreraSelect.appendChild(option);
-    });
-  } catch (error) {
-    console.error(error);
-    alert('No se pudieron cargar las carreras.');
+      const carreraSelect = document.getElementById('Select-carrera');
+      carreraSelect.innerHTML = '<option value="">Seleccione una carrera</option>';
+      carreras.forEach(carrera => {
+        const option = document.createElement('option');
+        option.value = carrera.id_carrera;
+        option.textContent = carrera.nombre;
+        carreraSelect.appendChild(option);
+      });
+    } catch (error) {
+      console.error('Error al cargar carreras:', error);
+      alert('No se pudieron cargar las carreras.');
+    }
   }
-}
+});

@@ -1,4 +1,12 @@
-   document.getElementById('form-maestro').addEventListener('submit', function (e) {
+document.addEventListener('DOMContentLoaded', () => {
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    window.location.replace('/html/login.html');
+    return;
+  }
+
+document.getElementById('form-maestro').addEventListener('submit', function (e) {
       e.preventDefault();
       const nombre = document.getElementById('Input-de-nombre-maestro').value;
 
@@ -17,3 +25,4 @@
         alert('Error al registrar maestro');
       });
     });
+});

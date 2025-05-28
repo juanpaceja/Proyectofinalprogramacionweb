@@ -1,3 +1,10 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    window.location.replace('/html/login.html');
+    return;
+  }
 
   document.getElementById('form-periodo').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -25,4 +32,4 @@
       alert('Error al crear periodo');
     });
   });
-
+});

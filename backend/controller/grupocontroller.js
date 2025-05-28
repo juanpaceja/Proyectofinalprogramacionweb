@@ -207,6 +207,20 @@ const getGruposPorCarrera = (req, res) => {
   });
 };
 
+const actualizarGrupoAlumno = (req, res) => {
+  const idAlumnoGrupo = req.params.id;
+  const { id_grupo } = req.body;
+
+  const sql = 'UPDATE alumno_grupo SET id_grupo = ? WHERE id_alumno_grupo = ?';
+  db.query(sql, [id_grupo, idAlumnoGrupo], (err, result) => {
+    if (err) {
+      console.error('Error al actualizar grupo del alumno:', err);
+      return res.status(500).json({ error: 'Error al actualizar grupo' });
+    }
+
+    res.status(200).json({ message: 'Grupo actualizado correctamente' });
+  });
+};
 
 
 module.exports = {
@@ -221,5 +235,6 @@ module.exports = {
   updateCalificacion,
   getGruposConAlumnos,
   eliminarAlumnoDeGrupo,
-  getGruposPorCarrera
+  getGruposPorCarrera,
+  actualizarGrupoAlumno
 };

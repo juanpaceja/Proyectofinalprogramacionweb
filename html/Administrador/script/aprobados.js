@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    window.location.replace('/html/login.html');
+    return;
+  }
+
   const resultado = document.getElementById('resultado');
 
   fetch('http://localhost:3000/api/aprobados')
@@ -24,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <th>Materia</th>
             <th>Semestre</th>
             <th>Calificación</th>
-            
           </tr>
         </thead>
       `;
@@ -35,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${item.materia}</td>
           <td>${item.semestre || item.periodo || '—'}</td>
           <td>${item.calificacion}</td>
-       
         </tr>
       `).join('');
 

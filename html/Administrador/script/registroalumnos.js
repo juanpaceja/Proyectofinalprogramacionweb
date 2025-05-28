@@ -1,11 +1,17 @@
-// En registroalumnos.js
 document.addEventListener('DOMContentLoaded', () => {
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    window.location.replace('/html/login.html');
+    return;
+  }
+
   const carreraSelect = document.getElementById('carrera');
   const grupoSelect = document.getElementById('grupo');
   const alumnoForm = document.getElementById('alumnoForm');
   const grupoForm = document.getElementById('grupoForm');
   const idAlumnoInput = document.getElementById('id_alumno');
-  const cancelarBtn = document.createElement('button'); // Botón para cancelar
+  const cancelarBtn = document.createElement('button');
 
   let idCarreraSeleccionada = null;
 
@@ -143,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
       
       alert('Grupo asignado correctamente');
       
-      // Resetear todo
       alumnoForm.reset();
       grupoForm.reset();
       alumnoForm.style.display = 'block';

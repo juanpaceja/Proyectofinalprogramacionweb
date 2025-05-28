@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    window.location.replace('/html/login.html');
+    return;
+  }
+
   const resultado = document.getElementById('resultado');
 
   fetch('http://localhost:3000/api/reprobados')
@@ -18,13 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
       table.className = 'table table-striped table-bordered text-center';
 
       const thead = `
-        <thead class="table-success">
+        <thead class="table-danger">
           <tr>
             <th>Alumno</th>
             <th>Materia</th>
             <th>Semestre</th>
             <th>Calificación</th>
-            
           </tr>
         </thead>
       `;
@@ -35,12 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${item.materia}</td>
           <td>${item.semestre || item.periodo || '—'}</td>
           <td>${item.calificacion}</td>
-          
         </tr>
       `).join('');
 
       table.innerHTML = thead + `<tbody>${tbody}</tbody>`;
-      resultado.innerHTML = ''; // Limpia el contenido anterior
+      resultado.innerHTML = ''; // Limpia contenido anterior
       resultado.appendChild(table);
     })
     .catch(error => {
