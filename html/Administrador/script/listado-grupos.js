@@ -22,7 +22,7 @@ async function cargarGrupos() {
               ${grupo.usuarios.map(user => `
                 <tr>
                   <td>
-                    <img src="${user.avatar_url || 'https://bootdey.com/img/Content/avatar/avatar1.png'}" alt="">
+                    <img src="/imagenes/Ejemplo-img-alumno.jpg" alt="">
                     <span class="user-link">${user.nombre}</span>
                     <span class="user-subhead">${user.rol}</span>
                   </td>
